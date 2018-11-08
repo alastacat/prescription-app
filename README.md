@@ -1,4 +1,4 @@
-# app-prescription
+# Prescription App
 
 > A Vue.js project
 
