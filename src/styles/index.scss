@@ -8,8 +8,8 @@ a {
 
 	&:hover {
 		text-decoration: none;
-		font-weight: bold;
 		color: #007bff; // bootstrap link default
+		text-shadow: 1px 1px 1px #007bff;
 	}
 
 	img {
