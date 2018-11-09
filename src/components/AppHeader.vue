@@ -44,7 +44,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import SignupModal from './SignUpModal';
+import SignupModal from './SignupModal';
 
 export default {
 	components: {
