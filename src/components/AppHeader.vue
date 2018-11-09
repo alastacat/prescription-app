@@ -7,13 +7,65 @@
 				Prescription&nbsp;<span class="Header__title--light">- App</span>
 			</router-link>
 
+			<section class="Header__authorization">
+				<b-button
+					variant="primary">
+					Login
+				</b-button>
+				<b-button
+					variant="outline-primary"
+					@click="onSignUpClick">
+					Sign up!
+				</b-button>
+			</section>
+
 		</div>
+
+		<signup-modal
+			:visible="isSignupModalVisible"
+			@close="onSignupModalClose"/>
 
 	</header>
 </template>
 
-<style lang="scss">
+<script>
+import SignupModal from './SignUpModal';
 
+export default {
+	components: {
+		SignupModal
+	},
+	data() {
+		return {
+			isSignupModalVisible: false
+		}
+	},
+	methods: {
+		onSignUpClick() {
+			this.$router.push({ query: { signUp: true } });
+		},
+		onSignupModalClose() {
+			this.$router.push({ query: { signUp: undefined } });
+			this.isSignupModalVisible = false;
+		},
+		handleURLQuery() {
+			const query = this.$route.query;
+			if (query.signUp) this.isSignupModalVisible = true;
+		}
+	},
+	watch: {
+		$route() {
+			this.handleURLQuery();
+		}
+	},
+	created() {
+		this.handleURLQuery();
+	}
+}
+</script>
+
+
+<style lang="scss">
 @import '../styles/index.scss';
 
 .Header {

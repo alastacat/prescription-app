@@ -1,11 +1,22 @@
 <template>
 	<b-container class="Unauthorized">
 
-		<span class="Unauthorized__title">Please <b-link>login</b-link> or <b-link>sign up!</b-link></span>
+		<span class="Unauthorized__title">Please <b-link>login</b-link> or <b-link @click="onSignupClick">sign up!</b-link></span>
 
 	</b-container>
 
 </template>
+
+<script>
+export default {
+	methods: {
+		onSignupClick() {
+			this.$router.push({ query: { signUp: true } });
+		}
+	}
+}
+</script>
+
 
 <style lang="scss">
 
