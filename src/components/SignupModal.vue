@@ -7,6 +7,8 @@
 		centered
 		size="lg"
 		ok-title="Create Account"
+		:ok-disabled="!isFormValid"
+		@ok="createAccount"
 		@hidden="emitClose">
 
 		<b-container>
@@ -24,7 +26,7 @@
 			</b-form-group>
 		</b-container>
 
-		<b-container>
+		<!-- <b-container>
 			<b-form-group
 				class="CreateAccount__formGroup"
 				label="Enter your name:"
@@ -36,7 +38,7 @@
 					id="signupName"
 					v-model.trim="name"/>
 			</b-form-group>
-		</b-container>
+		</b-container> -->
 
 		<b-container>
 			<b-form-group
@@ -72,6 +74,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
 	props: {
 		visible: {
@@ -82,8 +86,8 @@ export default {
 		return {
 			email: null,
 			emailFeedback: null,
-			name: null,
-			nameFeedback: null,
+			// name: null,
+			// nameFeedback: null,
 			password: null,
 			passwordFeedback: null,
 			confirmPassword: null,
@@ -94,7 +98,7 @@ export default {
 		isFormValid() {
 			return (
 				this.email &&
-				this.name &&
+				// this.name &&
 				this.password &&
 				this.password === this.confirmPassword
 
@@ -102,6 +106,15 @@ export default {
 		}
 	},
 	methods: {
+		...mapActions({
+			postNewAccount: 'account/signUp'
+		}),
+		createAccount() {
+			this.postNewAccount({
+				username: this.email,
+				password: this.password
+			})
+		},
 		emitClose() {
 			this.$emit('close');
 			this.clearData();
@@ -109,8 +122,8 @@ export default {
 		clearData() {
 			this.email = null;
 			this.emailFeedback = null;
-			this.name = null;
-			this.nameFeedback = null;
+			// this.name = null;
+			// this.nameFeedback = null;
 			this.password = null;
 			this.passwordFeedback = null;
 			this.confirmPassword = null;

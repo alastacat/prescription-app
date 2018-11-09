@@ -8,15 +8,29 @@
 			</router-link>
 
 			<section class="Header__authorization">
-				<b-button
-					variant="primary">
-					Login
-				</b-button>
-				<b-button
-					variant="outline-primary"
-					@click="onSignUpClick">
-					Sign up!
-				</b-button>
+
+				<template v-if="account">
+					<kbd v-text="account.email"/>
+					<b-button
+						variant="primary"
+						size="sm"
+						@click="onSignOutClick">
+						Sign out!
+					</b-button>
+				</template>
+
+				<template v-else>
+					<b-button
+						variant="primary">
+						Login
+					</b-button>
+					<b-button
+						variant="outline-primary"
+						@click="onSignUpClick">
+						Sign up!
+					</b-button>
+				</template>
+
 			</section>
 
 		</div>
@@ -29,6 +43,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import SignupModal from './SignUpModal';
 
 export default {
@@ -40,7 +55,19 @@ export default {
 			isSignupModalVisible: false
 		}
 	},
+	computed: {
+		...mapGetters({
+			account: 'account/account'
+		})
+	},
 	methods: {
+		...mapActions({
+			signOut: 'account/logOut'
+		}),
+		async onSignOutClick() {
+			await this.signOut();
+			this.$router.push('/');
+		},
 		onSignUpClick() {
 			this.$router.push({ query: { signUp: true } });
 		},
