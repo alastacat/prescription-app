@@ -37,6 +37,7 @@ export default {
 	font-weight: 300;
 	top: 0;
 	display: flex;
+	justify-content: center;
 }
 
 </style>
