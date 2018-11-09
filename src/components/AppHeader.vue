@@ -7,13 +7,92 @@
 				Prescription&nbsp;<span class="Header__title--light">- App</span>
 			</router-link>
 
+			<section class="Header__authorization">
+
+				<template v-if="account">
+					<kbd v-text="account.email"/>
+					<b-button
+						variant="primary"
+						size="sm"
+						@click="onSignOutClick">
+						Sign out!
+					</b-button>
+				</template>
+
+				<template v-else>
+					<b-button
+						variant="primary">
+						Login
+					</b-button>
+					<b-button
+						variant="outline-primary"
+						@click="onSignUpClick">
+						Sign up!
+					</b-button>
+				</template>
+
+			</section>
+
 		</div>
+
+		<signup-modal
+			:visible="isSignupModalVisible"
+			@close="onSignupModalClose"/>
 
 	</header>
 </template>
 
-<style lang="scss">
+<script>
+import { mapGetters, mapActions } from 'vuex';
+import SignupModal from './SignUpModal';
 
+export default {
+	components: {
+		SignupModal
+	},
+	data() {
+		return {
+			isSignupModalVisible: false
+		}
+	},
+	computed: {
+		...mapGetters({
+			account: 'account/account'
+		})
+	},
+	methods: {
+		...mapActions({
+			signOut: 'account/logOut'
+		}),
+		async onSignOutClick() {
+			await this.signOut();
+			this.$router.push('/');
+		},
+		onSignUpClick() {
+			this.$router.push({ query: { signUp: true } });
+		},
+		onSignupModalClose() {
+			this.$router.push({ query: { signUp: undefined } });
+			this.isSignupModalVisible = false;
+		},
+		handleURLQuery() {
+			const query = this.$route.query;
+			if (query.signUp) this.isSignupModalVisible = true;
+		}
+	},
+	watch: {
+		$route() {
+			this.handleURLQuery();
+		}
+	},
+	created() {
+		this.handleURLQuery();
+	}
+}
+</script>
+
+
+<style lang="scss">
 @import '../styles/index.scss';
 
 .Header {

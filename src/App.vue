@@ -34,6 +34,7 @@ export default {
 	color: $grey;
 	background: $white;
 	position: absolute;
+	font-weight: 300;
 	top: 0;
 	display: flex;
 }
