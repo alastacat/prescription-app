@@ -1,20 +1,67 @@
-C<template>
-	<b-container class="Unauthorized">
+<template>
+	<b-container class="CreatePrescription">
+		<b-card class="CreatePrescription__card">
 
-		<span class="Unauthorized__title">Please <b-link @click="onLoginClick">login</b-link> or <b-link @click="onSignupClick">sign up!</b-link></span>
+			<h3 class="CreatePrescription__title lead border-bottom">Create Prescription</h3>
 
+			<b-form-group
+				class="CreatePrescription__formGroup"
+				label="Author:"
+				label-for="prescriptionAuthor"
+				horizontal>
+				<b-form-input id="prescriptionAuthor" :value="author" disabled/>
+			</b-form-group>
+
+			<b-form-group
+				class="CreatePrescription__formGroup"
+				label="Prescription Name:"
+				label-for="prescriptionName"
+				horizontal>
+				<b-form-input id="prescriptionName" v-model.trim="name"/>
+			</b-form-group>
+
+			<b-form-group
+				class="CreatePrescription__formGroup"
+				label="Start Date:"
+				label-for="prescriptionStartDate"
+				horizontal>
+				<b-form-input id="prescriptionStartDate" v-model.trim="startDate" type="date"/>
+			</b-form-group>
+
+			<b-form-group
+				class="CreatePrescription__formGroup"
+				label="Description:"
+				label-for="prescriptionDescription"
+				horizontal>
+				<b-form-textarea id="prescriptionDescription" v-model.trim="startDate" :rows="3"/>
+			</b-form-group>
+
+			<b-button
+				class="CreatePrescription__submit"
+				variant="primary">
+				Create Prescription
+			</b-button>
+
+		</b-card>
 	</b-container>
 
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
-	methods: {
-		onLoginClick() {
-			this.$router.push({ query: { login: null } });
-		},
-		onSignupClick() {
-			this.$router.push({ query: { signUp: null } });
+	data() {
+		return {
+			name: null,
+			startDate: null
+		}
+	},
+	computed: {
+		...mapGetters({
+			account: 'account/account'
+		}),
+		author(){
+			return this.account.email;
 		}
 	}
 }
@@ -25,22 +72,30 @@ export default {
 
 @import '../../styles/index.scss';
 
-.Unauthorized {
+.CreatePrescription {
 	@extend .inner;
 	height: 100%;
 	justify-content: center;
-	align-self: center;
-	margin-top: $headerHeight;
 
-	@media all and (min-width: $tablet) {
-		margin-top: 0
+	&__card {
+		margin: 1rem;
+		width: 100%;
 	}
 
 	&__title {
-		font-size: 2rem;
-		width: auto;
-		margin-left: auto;
-		margin-right: auto;
+		text-align: left;
+		margin-bottom: 2rem;
+	}
+
+	&__formGroup {
+		.col-form-label {
+			text-align: left;
+		}
+	}
+
+	&__submit {
+		margin-top: 2rem;
+		float: right;
 	}
 
 }
