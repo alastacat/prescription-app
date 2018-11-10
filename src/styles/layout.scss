@@ -4,15 +4,18 @@ $desktop: 1024px;
 $headerHeight: 50px;
 $headerHeightDesktop: 80px;
 
-.inner {
-	width: 95%;
-	margin-left: 2.5%;
-	margin-right: 2.5%;
+.flexbox {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: left;
 	height: 100%;
+}
+
+.inner {
+	width: 95%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
 
 	@media all and (min-width: $tablet) {
 		width: 90%;
