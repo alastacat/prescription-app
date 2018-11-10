@@ -45,7 +45,7 @@
 			<b-button
 				variant="primary"
 				@click="submit">
-				Create Prescription
+				Publish Prescription
 			</b-button>
 
 			<p class="text-danger PrescriptionCreate__submit--text" v-text="errorText"/>
@@ -128,7 +128,7 @@ export default {
 	}
 
 	&__submit {
-		align-self: flex-start;
+		align-self: flex-end;
 
 		&--text {
 			display: inline-block;

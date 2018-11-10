@@ -2,6 +2,14 @@
 	<div class="PrescriptionList">
 		<h2 class="PrescriptionList__title lead border-bottom">View Prescriptions</h2>
 
+		<b-button
+			class="PrescriptionList__new"
+			:to="{ name: 'prescription.create' }"
+			variant="primary"
+			size="sm">
+			Create Prescription
+		</b-button>
+
 		<b-card class="PrescriptionList__card">
 			<b-table
 				:items="prescriptions"
@@ -38,6 +46,10 @@ export default {
 .PrescriptionList {
 	@extend .flexbox;
 	padding: 1rem;
+
+	&__new {
+		align-self: flex-start;
+	}
 
 	&__card {
 		margin: 1rem;
