@@ -1,11 +1,11 @@
 <template>
-	<b-container class="PrescriptionCreate">
-		<b-card class="PrescriptionCreate__card">
+	<b-container class="PrescriptionList">
+		<b-card class="PrescriptionList__card">
 
-			<h3 class="PrescriptionCreate__title lead border-bottom">Create Prescription</h3>
+			<h3 class="PrescriptionList__title lead border-bottom">Create Prescription</h3>
 
 			<b-form-group
-				class="PrescriptionCreate__formGroup"
+				class="PrescriptionList__formGroup"
 				label="Author:"
 				label-for="prescriptionAuthor"
 				horizontal>
@@ -13,7 +13,7 @@
 			</b-form-group>
 
 			<b-form-group
-				class="PrescriptionCreate__formGroup"
+				class="PrescriptionList__formGroup"
 				label="Prescription Name:"
 				label-for="prescriptionName"
 				horizontal>
@@ -21,7 +21,7 @@
 			</b-form-group>
 
 			<b-form-group
-				class="PrescriptionCreate__formGroup"
+				class="PrescriptionList__formGroup"
 				label="Start Date:"
 				label-for="prescriptionStartDate"
 				horizontal>
@@ -29,7 +29,7 @@
 			</b-form-group>
 
 			<b-form-group
-				class="PrescriptionCreate__formGroup"
+				class="PrescriptionList__formGroup"
 				label="Description:"
 				label-for="prescriptionDescription"
 				horizontal>
@@ -39,7 +39,7 @@
 			<p class="text-danger float-left" v-text="errorText"/>
 
 			<b-button
-				class="PrescriptionCreate__submit"
+				class="PrescriptionList__submit"
 				variant="primary"
 				@click="submit">
 				Create Prescription
@@ -97,7 +97,7 @@ export default {
 
 @import '../../styles/index.scss';
 
-.PrescriptionCreate {
+.PrescriptionList {
 	@extend .inner;
 	height: 100%;
 	justify-content: center;
