@@ -132,7 +132,7 @@ export default {
 		color: $grey;
 
 		&:hover {
-			text-decoration: none;
+			text-shadow: none;
 			color: $grey;
 		}
 
