@@ -1,47 +1,46 @@
 <template>
-	<b-container class="PrescriptionCreate">
-
+	<section class="PrescriptionCreate">
 		<h2 class="PrescriptionCreate__title lead border-bottom">Create Prescription</h2>
 
-		<b-card class="PrescriptionCreate__card">
+		<b-container class="PrescriptionCreate__card">
+			<b-card>
 
-			<b-form-group
-				class="PrescriptionCreate__formGroup"
-				label="Author:"
-				label-for="prescriptionAuthor"
-				horizontal>
-				<b-form-input id="prescriptionAuthor" :value="author" disabled/>
-			</b-form-group>
+				<b-form-group
+					class="PrescriptionCreate__formGroup"
+					label="Author:"
+					label-for="prescriptionAuthor"
+					horizontal>
+					<b-form-input id="prescriptionAuthor" :value="author" disabled/>
+				</b-form-group>
 
-			<b-form-group
-				class="PrescriptionCreate__formGroup"
-				label="Prescription Name:"
-				label-for="prescriptionName"
-				horizontal>
-				<b-form-input id="prescriptionName" v-model.trim="name"/>
-			</b-form-group>
+				<b-form-group
+					class="PrescriptionCreate__formGroup"
+					label="Prescription Name:"
+					label-for="prescriptionName"
+					horizontal>
+					<b-form-input id="prescriptionName" v-model.trim="name"/>
+				</b-form-group>
 
-			<b-form-group
-				class="PrescriptionCreate__formGroup"
-				label="Start Date:"
-				label-for="prescriptionStartDate"
-				horizontal>
-				<b-form-input id="prescriptionStartDate" v-model.trim="startDate" type="date"/>
-			</b-form-group>
+				<b-form-group
+					class="PrescriptionCreate__formGroup"
+					label="Start Date:"
+					label-for="prescriptionStartDate"
+					horizontal>
+					<b-form-input id="prescriptionStartDate" v-model.trim="startDate" type="date"/>
+				</b-form-group>
 
-			<b-form-group
-				class="PrescriptionCreate__formGroup"
-				label="Description:"
-				label-for="prescriptionDescription"
-				horizontal>
-				<b-form-textarea id="prescriptionDescription" v-model="description" :rows="3"/>
-			</b-form-group>
+				<b-form-group
+					class="PrescriptionCreate__formGroup"
+					label="Description:"
+					label-for="prescriptionDescription"
+					horizontal>
+					<b-form-textarea id="prescriptionDescription" v-model="description" :rows="3"/>
+				</b-form-group>
 
-		</b-card>
+			</b-card>
+		</b-container>
 
 		<section class="PrescriptionCreate__submit">
-
-			<p class="text-danger PrescriptionCreate__submit--text" v-text="errorText"/>
 
 			<b-button
 				variant="primary"
@@ -49,9 +48,11 @@
 				Create Prescription
 			</b-button>
 
+			<p class="text-danger PrescriptionCreate__submit--text" v-text="errorText"/>
+
 		</section>
 
-	</b-container>
+	</section>
 
 </template>
 
@@ -87,11 +88,11 @@ export default {
 			}
 			try {
 				await this.postSubmit(prescription);
+				this.$router.push({ name: 'prescription.list' });
 			} catch (err) {
 				console.log(err);
 				this.errorText = err.message;
 			}
-			// #Todo: redirect to prescription list page after creating new prescription
 		}
 	}
 }
@@ -103,16 +104,16 @@ export default {
 @import '../../styles/index.scss';
 
 .PrescriptionCreate {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	justify-content: center;
+	@extend .flexbox;
+	width: 100%;
 	padding: 1rem;
 
 	&__card {
 		display: block;
 		width: 100%;
 		margin-bottom: 1rem;
+		margin-left: 0;
+		padding-left: 0;
 	}
 
 	&__title {
@@ -128,7 +129,7 @@ export default {
 	}
 
 	&__submit {
-		align-self: flex-end;
+		align-self: flex-start;
 
 		&--text {
 			display: inline-block;
