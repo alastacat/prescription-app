@@ -84,6 +84,7 @@ export default {
 					username: this.email,
 					password: this.password
 				});
+				this.$router.push('/');
 				this.emitClose();
 			} catch (err) {
 				this.errorText = err.message;
