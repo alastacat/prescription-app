@@ -70,6 +70,8 @@
 			</b-form-group>
 		</b-container>
 
+		<p class="text-danger" v-text="errorText"/>
+
 	</b-modal>
 </template>
 
@@ -91,7 +93,8 @@ export default {
 			password: null,
 			passwordFeedback: null,
 			confirmPassword: null,
-			confirmPasswordFeedback: null
+			confirmPasswordFeedback: null,
+			errorText: null
 		}
 	},
 	computed: {
@@ -109,11 +112,19 @@ export default {
 		...mapActions({
 			postNewAccount: 'account/signUp'
 		}),
-		createAccount() {
-			this.postNewAccount({
-				username: this.email,
-				password: this.password
-			})
+		async createAccount(closeEvent) {
+			closeEvent.preventDefault();
+			try {
+				await this.postNewAccount({
+					username: this.email,
+					password: this.password
+				});
+				this.$router.push('/');
+				this.emitClose();
+			} catch (err) {
+				this.errorText = err.message;
+			}
+
 		},
 		emitClose() {
 			this.$emit('close');
@@ -128,6 +139,7 @@ export default {
 			this.passwordFeedback = null;
 			this.confirmPassword = null;
 			this.confirmPasswordFeedback = null;
+			this.errorText = null;
 		}
 	},
 	watch: {

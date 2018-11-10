@@ -1,7 +1,7 @@
 <template>
 	<header class="Header">
 
-		<div class="Header__inner">
+		<b-container class="Header__inner">
 
 			<router-link class="Header__title" to="/">
 				Prescription&nbsp;<span class="Header__title--light">- App</span>
@@ -12,16 +12,16 @@
 				<template v-if="account">
 					<kbd v-text="account.email"/>
 					<b-button
-						variant="primary"
 						size="sm"
 						@click="onSignOutClick">
-						Sign out!
+						Sign out
 					</b-button>
 				</template>
 
 				<template v-else>
 					<b-button
-						variant="primary">
+						variant="primary"
+						@click="onLoginClick">
 						Login
 					</b-button>
 					<b-button
@@ -33,26 +33,33 @@
 
 			</section>
 
-		</div>
+		</b-container>
 
 		<signup-modal
 			:visible="isSignupModalVisible"
 			@close="onSignupModalClose"/>
+
+		<login-modal
+			:visible="isLoginModalVisible"
+			@close="onLoginModalClose"/>
 
 	</header>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import SignupModal from './SignupModal';
+import SignupModal from './Signup.modal';
+import LoginModal from './Login.modal';
 
 export default {
 	components: {
-		SignupModal
+		SignupModal,
+		LoginModal
 	},
 	data() {
 		return {
-			isSignupModalVisible: false
+			isSignupModalVisible: false,
+			isLoginModalVisible: false
 		}
 	},
 	computed: {
@@ -66,18 +73,25 @@ export default {
 		}),
 		async onSignOutClick() {
 			await this.signOut();
-			this.$router.push('/');
 		},
 		onSignUpClick() {
-			this.$router.push({ query: { signUp: true } });
+			this.$router.push({ query: { signUp: null } });
 		},
 		onSignupModalClose() {
 			this.$router.push({ query: { signUp: undefined } });
 			this.isSignupModalVisible = false;
 		},
+		onLoginClick() {
+			this.$router.push({ query: { login: null } });
+		},
+		onLoginModalClose() {
+			this.$router.push({ query: { login: undefined } });
+			this.isLoginModalVisible = false;
+		},
 		handleURLQuery() {
 			const query = this.$route.query;
-			if (query.signUp) this.isSignupModalVisible = true;
+			if (query.signUp === null) this.isSignupModalVisible = true;
+			if (query.login === null) this.isLoginModalVisible = true;
 		}
 	},
 	watch: {
@@ -107,7 +121,8 @@ export default {
 	}
 
 	&__inner {
-		@extend .inner;
+		@extend .flexbox;
+		flex-direction: row;
 		justify-content: space-between;
 	}
 
@@ -117,7 +132,7 @@ export default {
 		color: $grey;
 
 		&:hover {
-			text-decoration: none;
+			text-shadow: none;
 			color: $grey;
 		}
 
