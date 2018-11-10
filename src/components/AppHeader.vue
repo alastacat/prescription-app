@@ -122,6 +122,7 @@ export default {
 
 	&__inner {
 		@extend .inner;
+		flex-direction: row;
 		justify-content: space-between;
 	}
 

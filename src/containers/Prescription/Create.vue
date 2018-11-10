@@ -1,8 +1,9 @@
 <template>
 	<b-container class="PrescriptionCreate">
-		<b-card class="PrescriptionCreate__card">
 
-			<h2 class="PrescriptionCreate__title lead border-bottom">Create Prescription</h2>
+		<h2 class="PrescriptionCreate__title lead border-bottom">Create Prescription</h2>
+
+		<b-card class="PrescriptionCreate__card">
 
 			<b-form-group
 				class="PrescriptionCreate__formGroup"
@@ -36,16 +37,20 @@
 				<b-form-textarea id="prescriptionDescription" v-model="description" :rows="3"/>
 			</b-form-group>
 
-			<p class="text-danger float-left" v-text="errorText"/>
+		</b-card>
+
+		<section class="PrescriptionCreate__submit">
+
+			<p class="text-danger PrescriptionCreate__submit--text" v-text="errorText"/>
 
 			<b-button
-				class="PrescriptionCreate__submit"
 				variant="primary"
 				@click="submit">
 				Create Prescription
 			</b-button>
 
-		</b-card>
+		</section>
+
 	</b-container>
 
 </template>
@@ -98,16 +103,20 @@ export default {
 @import '../../styles/index.scss';
 
 .PrescriptionCreate {
-	@extend .inner;
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	justify-content: center;
+	padding: 1rem;
 
 	&__card {
-		margin: 1rem;
+		display: block;
 		width: 100%;
+		margin-bottom: 1rem;
 	}
 
 	&__title {
+		width: 100%;
 		text-align: left;
 		margin-bottom: 2rem;
 	}
@@ -119,8 +128,12 @@ export default {
 	}
 
 	&__submit {
-		margin-top: 2rem;
-		float: right;
+		align-self: flex-end;
+
+		&--text {
+			display: inline-block;
+			margin-right: 1rem;
+		}
 	}
 
 }
