@@ -1,7 +1,7 @@
 <template>
 	<header class="Header">
 
-		<div class="Header__inner">
+		<b-container class="Header__inner">
 
 			<router-link class="Header__title" to="/">
 				Prescription&nbsp;<span class="Header__title--light">- App</span>
@@ -33,7 +33,7 @@
 
 			</section>
 
-		</div>
+		</b-container>
 
 		<signup-modal
 			:visible="isSignupModalVisible"
@@ -121,7 +121,7 @@ export default {
 	}
 
 	&__inner {
-		@extend .inner;
+		@extend .flexbox;
 		flex-direction: row;
 		justify-content: space-between;
 	}
