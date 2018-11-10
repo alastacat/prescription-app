@@ -77,7 +77,7 @@ export default {
 	},
 	methods: {
 		...mapActions({
-			postSubmit: 'prescription/submit'
+			submitPrescription: 'prescription/submit'
 		}),
 		async submit() {
 			const prescription = {
@@ -87,7 +87,7 @@ export default {
 				description: this.description
 			}
 			try {
-				await this.postSubmit(prescription);
+				await this.submitPrescription(prescription);
 				this.$router.push({ name: 'prescription.list' });
 			} catch (err) {
 				console.log(err);
