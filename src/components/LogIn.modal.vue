@@ -15,12 +15,12 @@
 			<b-form-group
 				class="SignIn__formGroup"
 				label="Enter your email:"
-				label-for="signupEmail"
+				label-for="loginEmail"
 				:state="!emailFeedback"
 				:invalid-feedback="emailFeedback"
 				horizontal>
 				<b-form-input
-					id="signupEmail"
+					id="loginEmail"
 					type="email"
 					v-model.trim="email"/>
 			</b-form-group>
@@ -30,12 +30,12 @@
 			<b-form-group
 				class="SignIn__formGroup"
 				label="Enter your password:"
-				label-for="signupPassword"
+				label-for="loginPassword"
 				:state="!passwordFeedback"
 				:invalid-feedback="passwordFeedback"
 				horizontal>
 				<b-form-input
-					id="signupPassword"
+					id="loginPassword"
 					type="password"
 					v-model.trim="password"/>
 			</b-form-group>
