@@ -33,7 +33,7 @@ export default {
 	margin-top: $headerHeight;
 
 	@media all and (min-width: $tablet) {
-		margin-top: 0
+		margin-top: 0;
 	}
 
 	&__title {
