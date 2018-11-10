@@ -12,10 +12,9 @@
 				<template v-if="account">
 					<kbd v-text="account.email"/>
 					<b-button
-						variant="primary"
 						size="sm"
 						@click="onSignOutClick">
-						Sign out!
+						Sign out
 					</b-button>
 				</template>
 
