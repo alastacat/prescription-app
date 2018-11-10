@@ -1,7 +1,7 @@
 <template>
 	<b-container class="Unauthorized">
 
-		<span class="Unauthorized__title">Please <b-link>login</b-link> or <b-link @click="onSignupClick">sign up!</b-link></span>
+		<span class="Unauthorized__title">Please <b-link @click="onLoginClick">login</b-link> or <b-link @click="onSignupClick">sign up!</b-link></span>
 
 	</b-container>
 
@@ -10,8 +10,11 @@
 <script>
 export default {
 	methods: {
+		onLoginClick() {
+			this.$router.push({ query: { login: null } });
+		},
 		onSignupClick() {
-			this.$router.push({ query: { signUp: true } });
+			this.$router.push({ query: { signUp: null } });
 		}
 	}
 }

@@ -19,7 +19,7 @@ export default {
 			return result;
 		},
 		async logIn({ state, commit, dispatch, rootState }, { username, password }) {
-			const result = await rootState.firebase.auth().signInWithEmailAndPassword({ username, password });
+			const result = await rootState.firebase.auth().signInWithEmailAndPassword(username, password);
 			commit('SET_ACCOUNT', result);
 			return result;
 		},

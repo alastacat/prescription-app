@@ -21,7 +21,8 @@
 
 				<template v-else>
 					<b-button
-						variant="primary">
+						variant="primary"
+						@click="onLoginClick">
 						Login
 					</b-button>
 					<b-button
@@ -39,20 +40,27 @@
 			:visible="isSignupModalVisible"
 			@close="onSignupModalClose"/>
 
+		<login-modal
+			:visible="isLoginModalVisible"
+			@close="onLoginModalClose"/>
+
 	</header>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import SignupModal from './SignupModal';
+import SignupModal from './Signup.modal';
+import LoginModal from './Login.modal';
 
 export default {
 	components: {
-		SignupModal
+		SignupModal,
+		LoginModal
 	},
 	data() {
 		return {
-			isSignupModalVisible: false
+			isSignupModalVisible: false,
+			isLoginModalVisible: false
 		}
 	},
 	computed: {
@@ -69,15 +77,23 @@ export default {
 			this.$router.push('/');
 		},
 		onSignUpClick() {
-			this.$router.push({ query: { signUp: true } });
+			this.$router.push({ query: { signUp: null } });
 		},
 		onSignupModalClose() {
 			this.$router.push({ query: { signUp: undefined } });
 			this.isSignupModalVisible = false;
 		},
+		onLoginClick() {
+			this.$router.push({ query: { login: null } });
+		},
+		onLoginModalClose() {
+			this.$router.push({ query: { login: undefined } });
+			this.isLoginModalVisible = false;
+		},
 		handleURLQuery() {
 			const query = this.$route.query;
-			if (query.signUp) this.isSignupModalVisible = true;
+			if (query.signUp === null) this.isSignupModalVisible = true;
+			if (query.login === null) this.isLoginModalVisible = true;
 		}
 	},
 	watch: {
