@@ -26,8 +26,7 @@ export default {
 @import '../../styles/index.scss';
 
 .Unauthorized {
-	@extend .inner;
-	height: 100%;
+	@extend .flexbox;
 	justify-content: center;
 	align-self: center;
 	margin-top: $headerHeight;
