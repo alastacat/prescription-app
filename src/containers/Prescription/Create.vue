@@ -2,7 +2,7 @@
 	<b-container class="PrescriptionCreate">
 		<b-card class="PrescriptionCreate__card">
 
-			<h3 class="PrescriptionCreate__title lead border-bottom">Create Prescription</h3>
+			<h2 class="PrescriptionCreate__title lead border-bottom">Create Prescription</h2>
 
 			<b-form-group
 				class="PrescriptionCreate__formGroup"
