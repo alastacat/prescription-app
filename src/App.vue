@@ -9,11 +9,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import AppHeader from '@/components/AppHeader.vue';
 
 export default {
 	components: {
 		AppHeader
+	},
+	computed: {
+		...mapGetters({
+			account: 'account/account'
+		})
+	},
+	watch: {
+		account() {
+			if (!this.account) this.$router.push({ name: 'account.unauthorized' });
+		}
 	}
 };
 

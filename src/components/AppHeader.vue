@@ -74,7 +74,6 @@ export default {
 		}),
 		async onSignOutClick() {
 			await this.signOut();
-			this.$router.push('/');
 		},
 		onSignUpClick() {
 			this.$router.push({ query: { signUp: null } });

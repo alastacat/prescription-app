@@ -3,8 +3,8 @@ import Unauthorized from './Unauthorized';
 
 const routes = [
 	{
-		name: 'account.unnauthorized',
-		path: '/',
+		name: 'account.unauthorized',
+		path: '/unauthorized',
 		component: Unauthorized,
 	}
 ];
