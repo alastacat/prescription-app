@@ -13,8 +13,7 @@
 		<b-card class="PrescriptionList__card">
 			<b-table
 				:items="prescriptions"
-				:fields="fields"
-				striped/>
+				:fields="fields"/>
 		</b-card>
 	</div>
 
