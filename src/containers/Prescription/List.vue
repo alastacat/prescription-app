@@ -13,6 +13,7 @@
 		<b-card class="PrescriptionList__card">
 			<b-table
 				:items="prescriptions"
+				:fields="fields"
 				striped/>
 		</b-card>
 	</div>
@@ -22,6 +23,16 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
+	data() {
+		return {
+			fields: [
+				{ key: 'name' },
+				{ key: 'startDate' },
+				{ key: 'description' },
+				{ key: 'author' },
+			]
+		}
+	},
 	computed: {
 		...mapGetters({
 			prescriptions: 'prescription/prescriptions'
