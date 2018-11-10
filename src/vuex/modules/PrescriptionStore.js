@@ -8,9 +8,9 @@ export default {
 	},
 	mutations: {
 		SET_PRESCRIPTION(state, result) {
-
+			// #Todo: create mutation to store most recently loaded prescription
 		},
-		SET_PRESCRIPTIONs(state, result) {
+		SET_PRESCRIPTIONS(state, result) {
 
 		}
 	},
