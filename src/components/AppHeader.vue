@@ -1,7 +1,7 @@
 <template>
 	<header class="Header">
 
-		<div class="Header__inner">
+		<b-container class="Header__inner">
 
 			<router-link class="Header__title" to="/">
 				Prescription&nbsp;<span class="Header__title--light">- App</span>
@@ -12,10 +12,9 @@
 				<template v-if="account">
 					<kbd v-text="account.email"/>
 					<b-button
-						variant="primary"
 						size="sm"
 						@click="onSignOutClick">
-						Sign out!
+						Sign out
 					</b-button>
 				</template>
 
@@ -34,7 +33,7 @@
 
 			</section>
 
-		</div>
+		</b-container>
 
 		<signup-modal
 			:visible="isSignupModalVisible"
@@ -74,7 +73,6 @@ export default {
 		}),
 		async onSignOutClick() {
 			await this.signOut();
-			this.$router.push('/');
 		},
 		onSignUpClick() {
 			this.$router.push({ query: { signUp: null } });
@@ -123,7 +121,8 @@ export default {
 	}
 
 	&__inner {
-		@extend .inner;
+		@extend .flexbox;
+		flex-direction: row;
 		justify-content: space-between;
 	}
 
@@ -133,7 +132,7 @@ export default {
 		color: $grey;
 
 		&:hover {
-			text-decoration: none;
+			text-shadow: none;
 			color: $grey;
 		}
 

@@ -1,7 +1,8 @@
 import firebase from 'firebase';
 import VuexPersistence from 'vuex-persist';
 
-import accountStore from './modules/accountStore';
+import accountStore from './modules/AccountStore';
+import prescriptionStore from './modules/PrescriptionStore';
 
 // Firebase connection. Since this info is public it's important to have security rules set.
 const firebaseConfig = {
@@ -29,7 +30,8 @@ const store = {
 		db
 	},
 	modules: {
-		account: accountStore
+		account: accountStore,
+		prescription: prescriptionStore
 	},
 	plugins: [
 		vuexCookie.plugin
