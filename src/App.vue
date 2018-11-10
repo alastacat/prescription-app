@@ -53,10 +53,12 @@ export default {
 	justify-content: center;
 
 	&__content {
+		width: 100%;
 		margin-top: $headerHeight;
+
 		@media all and (min-width: $desktop) {
-		margin-top: $headerHeightDesktop;
-	}
+			margin-top: $headerHeightDesktop;
+		}
 	}
 }
 
