@@ -105,7 +105,6 @@ export default {
 
 .PrescriptionCreate {
 	@extend .flexbox;
-	width: 100%;
 	padding: 1rem;
 
 	&__card {
