@@ -1,12 +1,13 @@
 <template>
-	<b-container class="PrescriptionList">
+	<div class="PrescriptionList">
+		<h2 class="PrescriptionList__title lead border-bottom">View Prescriptions</h2>
+
 		<b-card class="PrescriptionList__card">
-
-			<h2 class="PrescriptionList__title lead border-bottom">View Prescriptions</h2>
-
-
+			<b-table
+				:items="prescriptions"
+				striped/>
 		</b-card>
-	</b-container>
+	</div>
 
 </template>
 
@@ -15,16 +16,16 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
 	computed: {
 		...mapGetters({
-			prescriptions: 'account/account'
-		}),
-		author(){
-			return this.account.email;
-		}
+			prescriptions: 'prescription/prescriptions'
+		})
 	},
 	methods: {
 		...mapActions({
-			postSubmit: 'prescription/submit'
+			fetchPrescriptions: 'prescription/find'
 		})
+	},
+	created() {
+		this.fetchPrescriptions();
 	}
 }
 </script>
@@ -35,9 +36,8 @@ export default {
 @import '../../styles/index.scss';
 
 .PrescriptionList {
-	@extend .inner;
-	height: 100%;
-	justify-content: center;
+	@extend .flexbox;
+	padding: 1rem;
 
 	&__card {
 		margin: 1rem;
@@ -45,19 +45,9 @@ export default {
 	}
 
 	&__title {
+		width: 100%;
 		text-align: left;
-		margin-bottom: 2rem;
-	}
-
-	&__formGroup {
-		.col-form-label {
-			text-align: left;
-		}
-	}
-
-	&__submit {
-		margin-top: 2rem;
-		float: right;
+		margin-bottom: 1rem;
 	}
 
 }

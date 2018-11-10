@@ -118,7 +118,7 @@ export default {
 	&__title {
 		width: 100%;
 		text-align: left;
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 	}
 
 	&__formGroup {
