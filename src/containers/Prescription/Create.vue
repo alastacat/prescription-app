@@ -33,12 +33,15 @@
 				label="Description:"
 				label-for="prescriptionDescription"
 				horizontal>
-				<b-form-textarea id="prescriptionDescription" v-model.trim="startDate" :rows="3"/>
+				<b-form-textarea id="prescriptionDescription" v-model="description" :rows="3"/>
 			</b-form-group>
+
+			<p class="text-danger float-left" v-text="errorText"/>
 
 			<b-button
 				class="CreatePrescription__submit"
-				variant="primary">
+				variant="primary"
+				@click="submit">
 				Create Prescription
 			</b-button>
 
@@ -48,12 +51,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
 	data() {
 		return {
 			name: null,
-			startDate: null
+			startDate: null,
+			description: null,
+			errorText: null
 		}
 	},
 	computed: {
@@ -62,6 +67,26 @@ export default {
 		}),
 		author(){
 			return this.account.email;
+		}
+	},
+	methods: {
+		...mapActions({
+			postSubmit: 'prescription/submit'
+		}),
+		async submit() {
+			const prescription = {
+				author: this.author,
+				name: this.name,
+				startDate: this.startDate,
+				description: this.description
+			}
+			try {
+				await this.postSubmit(prescription);
+			} catch (err) {
+				console.log(err);
+				this.errorText = err.message;
+			}
+			// #Todo: redirect to prescription list page after creating new prescription
 		}
 	}
 }
