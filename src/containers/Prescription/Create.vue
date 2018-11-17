@@ -1,50 +1,42 @@
 <template>
-	<div class="PrescriptionCreate">
-		<h2 class="App__title">Create Prescription</h2>
+	<div class="TemplateCreate">
+		<h2 class="App__title">Create Prescription Template</h2>
 
-		<b-row class="PrescriptionCreate__content">
+		<b-row class="TemplateCreate__content">
 			<b-col>
 				<b-card title="Details">
 
 					<b-form-group
-						class="PrescriptionCreate__formGroup"
+						class="TemplateCreate__formGroup"
 						label="Author:"
-						label-for="prescriptionAuthor"
+						label-for="templateAuthor"
 						horizontal>
-						<b-form-input id="prescriptionAuthor" :value="author" disabled/>
+						<b-form-input id="templateAuthor" :value="author" disabled/>
 					</b-form-group>
 
 					<b-form-group
-						class="PrescriptionCreate__formGroup"
+						class="TemplateCreate__formGroup"
 						label="Name:"
-						label-for="prescriptionName"
+						label-for="templateName"
 						horizontal>
-						<b-form-input id="prescriptionName" v-model.trim="name"/>
+						<b-form-input id="templateName" v-model.trim="name"/>
 					</b-form-group>
 
 					<b-form-group
-						class="PrescriptionCreate__formGroup"
-						label="Start Date:"
-						label-for="prescriptionStartDate"
-						horizontal>
-						<b-form-input id="prescriptionStartDate" v-model.trim="startDate" type="date"/>
-					</b-form-group>
-
-					<b-form-group
-						class="PrescriptionCreate__formGroup"
+						class="TemplateCreate__formGroup"
 						label="Description:"
-						label-for="prescriptionDescription"
+						label-for="templateDescription"
 						horizontal>
-						<b-form-textarea id="prescriptionDescription" v-model="description" :rows="3"/>
+						<b-form-textarea id="templateDescription" v-model="description" :rows="3"/>
 					</b-form-group>
 
 				</b-card>
 			</b-col>
 			<b-col>
-				<b-card body-class="PrescriptionCreate__survey" title="Surveys">
+				<b-card body-class="TemplateCreate__survey" title="Surveys">
 
 					<b-button
-						class="PrescriptionCreate__survey__add"
+						class="TemplateCreate__survey__add"
 						variant="primary"
 						size="sm"
 						@click="onNewSurveyClick">
@@ -52,7 +44,7 @@
 					</b-button>
 
 					<b-list-group>
-						<b-list-group-item class="PrescriptionCreate__survey__item" v-for="(survey, i) in surveys" :key="i">
+						<b-list-group-item class="TemplateCreate__survey__item" v-for="(survey, i) in surveys" :key="i">
 
 							<span v-text="survey.name"/>
 
@@ -67,16 +59,16 @@
 			</b-col>
 		</b-row>
 
-		<section class="PrescriptionCreate__submit">
+		<section class="TemplateCreate__submit">
 
 			<b-button
 				variant="outline-primary"
-				:disabled="!isPrescriptionValid"
+				:disabled="!isPrescriptionTemplateValid"
 				@click="submit">
-				Publish Prescription
+				Publish Prescription Template
 			</b-button>
 
-			<p class="text-danger PrescriptionCreate__submit--text" v-text="errorText"/>
+			<p class="text-danger TemplateCreate__submit--text" v-text="errorText"/>
 
 		</section>
 
@@ -99,7 +91,6 @@ export default {
 	data() {
 		return {
 			name: null,
-			startDate: null,
 			description: null,
 			surveys: [],
 			isAddSurveyModalVisible: false,
@@ -113,26 +104,25 @@ export default {
 		author(){
 			return this.account.email;
 		},
-		isPrescriptionValid() {
+		isPrescriptionTemplateValid() {
 			if (!this.name) return false;
 			return true;
 		}
 	},
 	methods: {
 		...mapActions({
-			submitPrescription: 'prescription/submit'
+			submitTemplate: 'prescription-template/submit'
 		}),
 		async submit() {
 			const prescription = {
 				author: this.author,
 				name: this.name,
-				startDate: this.startDate,
 				description: this.description,
 				surveys: this.surveys
 			}
 			try {
-				await this.submitPrescription(prescription);
-				this.$router.push({ name: 'prescription.list' });
+				await this.submitTemplate(prescription);
+				this.$router.push({ name: 'prescriptionTemplate.list' });
 			} catch (err) {
 				this.errorText = err.message;
 			}
@@ -158,7 +148,7 @@ export default {
 
 @import '../../styles/index.scss';
 
-.PrescriptionCreate {
+.TemplateCreate {
 	@extend .flexbox;
 	padding: 1rem;
 

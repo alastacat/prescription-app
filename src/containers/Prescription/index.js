@@ -3,13 +3,13 @@ import Create from './Create';
 
 const routes = [
 	{
-		name: 'prescription.list',
-		path: '/prescriptions',
+		name: 'prescriptionTemplate.list',
+		path: '/prescription-templates',
 		component: List,
 	},
 	{
-		name: 'prescription.create',
-		path: '/prescriptions/create',
+		name: 'prescriptionTemplate.create',
+		path: '/prescription-templates/create',
 		component: Create,
 	}
 ];
