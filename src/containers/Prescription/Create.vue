@@ -102,7 +102,7 @@ export default {
 			account: 'account/account'
 		}),
 		author(){
-			return this.account.email;
+			return `${this.account.title}. ${this.account.firstName} ${this.account.lastName}`
 		},
 		isPrescriptionTemplateValid() {
 			if (!this.name) return false;

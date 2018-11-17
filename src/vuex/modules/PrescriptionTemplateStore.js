@@ -11,6 +11,10 @@ export default {
 			// #Todo: create mutation to store most recently loaded prescription
 		},
 		SET_PRESCRIPTION_TEMPLATES(state, result) {
+			if (!result) {
+				state.prescriptionTemplates = [];
+				return;
+			}
 			const prescriptionTemplates = Object.values(result);
 			state.prescriptionTemplates = prescriptionTemplates;
 		}

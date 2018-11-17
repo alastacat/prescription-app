@@ -1,30 +1,52 @@
+const MODULE = 'users'
+
 export default {
 	namespaced: true,
 	state: {
-		account: null		// the user object from our database records
+		auth: null,
+		account: null
 	},
 	mutations: {
-		SET_ACCOUNT(state, data) {
+		SET_AUTH(state, data) {
 			if (!data) {
-				state.account = null
+				state.auth = null;
 			} else {
-				state.account = data.user;
+				state.auth = data;
+			}
+		},
+		SET_ACCOUNT(state, account) {
+			if (!account) {
+				state.account = null;
+			} else {
+				state.account = account;
 			}
 		}
 	},
 	actions: {
-		async signUp({ commit, rootState }, { username, password }) {
-			const result = await rootState.firebase.auth().createUserWithEmailAndPassword(username, password);
-			commit('SET_ACCOUNT', result);
-			return result;
+		async signUp({ commit, dispatch, rootState }, { username, password, title, firstName, lastName }) {
+			let result = await rootState.firebase.auth().createUserWithEmailAndPassword(username, password);
+			commit('SET_AUTH', result);
+			const user = await rootState.db.ref(`${MODULE}/${result.user.uid}`).set({
+				title,
+				firstName,
+				lastName,
+				email: username
+			});
+			dispatch('logIn', { username, password });
+			return user;
 		},
-		async logIn({ state, commit, dispatch, rootState }, { username, password }) {
+		async logIn({ commit, rootState }, { username, password }) {
 			const result = await rootState.firebase.auth().signInWithEmailAndPassword(username, password);
-			commit('SET_ACCOUNT', result);
-			return result;
+			commit('SET_AUTH', result);
+			const accountRef = rootState.db.ref(`${MODULE}/${result.user.uid}`);
+			const accountSnap = await accountRef.once('value');
+			const account = accountSnap.val();
+			commit('SET_ACCOUNT', account);
+			return account;
 		},
 		async logOut({ commit, rootState }) {
 			const result = await rootState.firebase.auth().signOut();
+			commit('SET_AUTH', null);
 			commit('SET_ACCOUNT', null);
 			return result;
 		},
