@@ -60,6 +60,15 @@ export default {
 			margin-top: $headerHeightDesktop;
 		}
 	}
+
+	&__title {
+		width: 100%;
+		font-weight: 300;
+		font-size: 1.8rem;
+		text-align: left;
+		border-bottom: 1px solid $white-off;
+		margin-bottom: 1rem;
+	}
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="PrescriptionList">
-		<h2 class="PrescriptionList__title lead border-bottom">View Prescriptions</h2>
+		<h2 class="App__title">View Prescriptions</h2>
 
 		<b-button
 			class="PrescriptionList__new"
@@ -13,7 +13,12 @@
 		<b-card class="PrescriptionList__card">
 			<b-table
 				:items="prescriptions"
-				:fields="fields"/>
+				:fields="fields">
+				<template slot="surveys" slot-scope="data">
+					<span v-if="data.item.surveys" v-text="data.item.surveys.length"/>
+					<span v-else v-text="'0'"/>
+				</template>
+			</b-table>
 		</b-card>
 	</div>
 
@@ -27,6 +32,7 @@ export default {
 			fields: [
 				{ key: 'name' },
 				{ key: 'startDate' },
+				{ key: 'surveys' },
 				{ key: 'description' },
 				{ key: 'author' },
 			]
@@ -50,7 +56,6 @@ export default {
 
 
 <style lang="scss">
-
 @import '../../styles/index.scss';
 
 .PrescriptionList {
@@ -66,11 +71,6 @@ export default {
 		width: 100%;
 	}
 
-	&__title {
-		width: 100%;
-		text-align: left;
-		margin-bottom: 1rem;
-	}
 
 }
 

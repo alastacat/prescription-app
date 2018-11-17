@@ -3,7 +3,6 @@
 		class="CreateAccount"
 		title="Create Account"
 		:visible="visible"
-		show="true"
 		centered
 		size="lg"
 		ok-title="Create Account"
