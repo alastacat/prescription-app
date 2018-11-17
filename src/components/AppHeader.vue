@@ -21,11 +21,13 @@
 				<template v-else>
 					<b-button
 						variant="primary"
+						size="sm"
 						@click="onLoginClick">
 						Login
 					</b-button>
 					<b-button
 						variant="outline-primary"
+						size="sm"
 						@click="onSignUpClick">
 						Sign up!
 					</b-button>
@@ -114,7 +116,7 @@ export default {
 	height: $headerHeight;
 	position: fixed;
 	top: 0;
-	background: darken($white, 6);
+	background: $white-off;
 
 	@media all and (min-width: $desktop) {
 		height: $headerHeightDesktop;

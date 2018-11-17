@@ -3,7 +3,6 @@
 		class="SignIn"
 		title="Sign In"
 		:visible="visible"
-		show="true"
 		centered
 		size="lg"
 		ok-title="Login"

@@ -1,19 +1,24 @@
 <template>
-	<div class="PrescriptionList">
-		<h2 class="PrescriptionList__title lead border-bottom">View Prescriptions</h2>
+	<div class="TemplateList">
+		<h2 class="App__title">View Prescription Templates</h2>
 
 		<b-button
-			class="PrescriptionList__new"
-			:to="{ name: 'prescription.create' }"
+			class="TemplateList__new"
+			:to="{ name: 'prescriptionTemplate.create' }"
 			variant="primary"
 			size="sm">
-			Create Prescription
+			Create Prescription Template
 		</b-button>
 
-		<b-card class="PrescriptionList__card">
+		<b-card class="TemplateList__card">
 			<b-table
-				:items="prescriptions"
-				:fields="fields"/>
+				:items="prescriptionTemplates"
+				:fields="fields">
+				<template slot="surveys" slot-scope="data">
+					<span v-if="data.item.surveys" v-text="data.item.surveys.length"/>
+					<span v-else v-text="'0'"/>
+				</template>
+			</b-table>
 		</b-card>
 	</div>
 
@@ -26,7 +31,7 @@ export default {
 		return {
 			fields: [
 				{ key: 'name' },
-				{ key: 'startDate' },
+				{ key: 'surveys' },
 				{ key: 'description' },
 				{ key: 'author' },
 			]
@@ -34,26 +39,25 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			prescriptions: 'prescription/prescriptions'
+			prescriptionTemplates: 'prescription-template/prescription-templates'
 		})
 	},
 	methods: {
 		...mapActions({
-			fetchPrescriptions: 'prescription/find'
+			fetchPrescriptionTemplates: 'prescription-template/find'
 		})
 	},
 	created() {
-		this.fetchPrescriptions();
+		this.fetchPrescriptionTemplates();
 	}
 }
 </script>
 
 
 <style lang="scss">
-
 @import '../../styles/index.scss';
 
-.PrescriptionList {
+.TemplateList {
 	@extend .flexbox;
 	padding: 1rem;
 
@@ -66,11 +70,6 @@ export default {
 		width: 100%;
 	}
 
-	&__title {
-		width: 100%;
-		text-align: left;
-		margin-bottom: 1rem;
-	}
 
 }
 

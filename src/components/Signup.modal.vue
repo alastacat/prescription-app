@@ -3,7 +3,6 @@
 		class="CreateAccount"
 		title="Create Account"
 		:visible="visible"
-		show="true"
 		centered
 		size="lg"
 		ok-title="Create Account"
@@ -12,6 +11,41 @@
 		@hidden="emitClose">
 
 		<b-container>
+
+			<b-form-group
+				class="CreateAccount__formGroup"
+				label="Title:"
+				label-for="signupTitle"
+				:state="!titleFeedback"
+				:invalid-feedback="titleFeedback"
+				horizontal>
+				<b-form-select id="signupTitle" v-model="title" :options="titleOptions"/>
+			</b-form-group>
+
+			<b-form-group
+				class="CreateAccount__formGroup"
+				label="First Name:"
+				label-for="signupFirstName"
+				:state="!firstNameFeedback"
+				:invalid-feedback="firstNameFeedback"
+				horizontal>
+				<b-form-input
+					id="signupFirstName"
+					v-model.trim="firstName"/>
+			</b-form-group>
+
+			<b-form-group
+				class="CreateAccount__formGroup"
+				label="Last Name:"
+				label-for="signupLastName"
+				:state="!lastNameFeedback"
+				:invalid-feedback="lastNameFeedback"
+				horizontal>
+				<b-form-input
+					id="signupLastName"
+					v-model.trim="lastName"/>
+			</b-form-group>
+
 			<b-form-group
 				class="CreateAccount__formGroup"
 				label="Enter your email:"
@@ -24,23 +58,7 @@
 					type="email"
 					v-model.trim="email"/>
 			</b-form-group>
-		</b-container>
 
-		<!-- <b-container>
-			<b-form-group
-				class="CreateAccount__formGroup"
-				label="Enter your name:"
-				label-for="signupName"
-				:state="!nameFeedback"
-				:invalid-feedback="nameFeedback"
-				horizontal>
-				<b-form-input
-					id="signupName"
-					v-model.trim="name"/>
-			</b-form-group>
-		</b-container> -->
-
-		<b-container>
 			<b-form-group
 				class="CreateAccount__formGroup"
 				label="Enter your password:"
@@ -53,9 +71,7 @@
 					type="password"
 					v-model.trim="password"/>
 			</b-form-group>
-		</b-container>
 
-		<b-container>
 			<b-form-group
 				class="CreateAccount__formGroup"
 				label="Confirm password."
@@ -68,6 +84,7 @@
 					type="password"
 					v-model.trim="confirmPassword"/>
 			</b-form-group>
+
 		</b-container>
 
 		<p class="text-danger" v-text="errorText"/>
@@ -86,10 +103,17 @@ export default {
 	},
 	data() {
 		return {
+			titleOptions: [
+				"Dr", "Mr", "Ms", "Mrs"
+			],
+			title: null,
+			titleFeedback: null,
+			firstName: null,
+			firstNameFeedback: null,
+			lastName: null,
+			lastNameFeedback: null,
 			email: null,
 			emailFeedback: null,
-			// name: null,
-			// nameFeedback: null,
 			password: null,
 			passwordFeedback: null,
 			confirmPassword: null,
@@ -101,7 +125,9 @@ export default {
 		isFormValid() {
 			return (
 				this.email &&
-				// this.name &&
+				this.title &&
+				this.firstName &&
+				this.lastName &&
 				this.password &&
 				this.password === this.confirmPassword
 
@@ -117,7 +143,10 @@ export default {
 			try {
 				await this.postNewAccount({
 					username: this.email,
-					password: this.password
+					password: this.password,
+					title: this.title,
+					firstName: this.firstName,
+					lastName: this.lastName
 				});
 				this.$router.push('/');
 				this.emitClose();
@@ -131,10 +160,11 @@ export default {
 			this.clearData();
 		},
 		clearData() {
+			this.title = null;
+			this.firstName = null;
+			this.lastName = null;
 			this.email = null;
 			this.emailFeedback = null;
-			// this.name = null;
-			// this.nameFeedback = null;
 			this.password = null;
 			this.passwordFeedback = null;
 			this.confirmPassword = null;
