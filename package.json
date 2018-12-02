@@ -1,7 +1,7 @@
 {
-	"name": "app-prescription",
-	"version": "1.0.5",
-	"description": "A Vue.js project",
+	"name": "Prescription WebApp",
+	"version": "1.0.6",
+	"description": "A web app to allow the creation of custom surveys and information modules for patients.",
 	"author": "Michael Fitzhavey <michael-fitzhavey@gmail.com>",
 	"private": true,
 	"scripts": {
