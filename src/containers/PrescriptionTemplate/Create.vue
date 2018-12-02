@@ -72,21 +72,21 @@
 
 		</section>
 
-		<new-survey-modal
+		<survey-create-modal
 			:visible="isAddSurveyModalVisible"
 			@submit="onNewSurveySubmit"
-			@close="onNewSurveyModalClose"/>
+			@close="onSurveyCreateModalClose"/>
 
 	</div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import NewSurveyModal from './components/NewSurvey.modal';
+import SurveyCreateModal from './components/SurveyCreate.modal';
 
 export default {
 	components: {
-		NewSurveyModal
+		SurveyCreateModal
 	},
 	data() {
 		return {
@@ -130,7 +130,7 @@ export default {
 		onNewSurveyClick() {
 			this.isAddSurveyModalVisible = true;
 		},
-		onNewSurveyModalClose() {
+		onSurveyCreateModalClose() {
 			this.isAddSurveyModalVisible = false;
 		},
 		onNewSurveySubmit(newSurvey) {
