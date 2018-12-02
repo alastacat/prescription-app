@@ -69,6 +69,23 @@ export default {
 		border-bottom: 1px solid $white-off;
 		margin-bottom: 1rem;
 	}
+
+	&__card {
+		margin: 1rem;
+		width: 100%;
+		text-align: left;
+	}
+
+	&__loader {
+		width: 3rem;
+		height: 3rem;
+		animation: spin 1000ms linear infinite;
+	}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
 }
 
 </style>

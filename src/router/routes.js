@@ -1,9 +1,9 @@
 import accountRoutes from '../containers/Account';
-import prescriptionRoutes from '../containers/Prescription'
+import prescriptionTemplateroutes from '../containers/PrescriptionTemplate'
 
 const routes = [
 	...accountRoutes,
-	...prescriptionRoutes,
+	...prescriptionTemplateroutes,
 	{
 		path: '/',
 		redirect: {

@@ -7,15 +7,26 @@ export default {
 		prescriptionTemplates: []
 	},
 	mutations: {
-		SET_PRESCRIPTION_TEMPLATE(state, result) {
-			// #Todo: create mutation to store most recently loaded prescription
+		SET_PRESCRIPTION_TEMPLATE(state, result, id) {
+			const prescripionTemplate = {
+				...result,
+				_id: id
+			}
+			state.prescriptionTemplate = prescripionTemplate;
 		},
 		SET_PRESCRIPTION_TEMPLATES(state, result) {
 			if (!result) {
 				state.prescriptionTemplates = [];
 				return;
 			}
-			const prescriptionTemplates = Object.values(result);
+			const prescriptionTemplates = [];
+			// Attach the ids to the prescription template objects
+			Object.keys(result).forEach(key => {
+				prescriptionTemplates.push({
+					...result[key],
+					_id: key
+				})
+			})
 			state.prescriptionTemplates = prescriptionTemplates;
 		}
 	},
@@ -24,11 +35,23 @@ export default {
 			const result = await rootState.db.ref(MODULE).push(data);
 			return result;
 		},
-		async find({ rootState, commit }) {
-			const ref = rootState.db.ref(MODULE);
+		async find({ rootState, commit }, filters) {
+			let ref;
+			if (filters && filters.author) {
+				ref = rootState.db.ref(MODULE).orderByChild('author').equalTo(filters.author)
+			} else {
+				ref = rootState.db.ref(MODULE);
+			}
 			const snap = await ref.once('value');
 			const data = snap.val();
 			commit('SET_PRESCRIPTION_TEMPLATES', data);
+		},
+		async get({rootState, commit}, id) {
+			const path = `${MODULE}/${id}`
+			const ref = rootState.db.ref(path);
+			const snap = await ref.once('value');
+			const data = snap.val();
+			commit('SET_PRESCRIPTION_TEMPLATE', data, id);
 		}
 
 	},

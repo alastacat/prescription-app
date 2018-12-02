@@ -95,7 +95,7 @@ export default {
 				questions: this.questions
 			});
 			this.name = null;
-			this.questions = null;
+			this.questions = [];
 		},
 		close() {
 			this.$emit('close');
