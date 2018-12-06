@@ -33,18 +33,17 @@
 				</b-card>
 			</b-col>
 			<b-col>
-				<b-card body-class="TemplateCreate__survey" title="Surveys">
 
+				<b-card body-class="TemplateCreate__module" title="Survey Modules" class="mb-3">
 					<b-button
-						class="TemplateCreate__survey__add"
+						class="TemplateCreate__module__add"
 						variant="primary"
 						size="sm"
 						@click="onNewSurveyClick">
-						Add Survery
+						Add Survery Module
 					</b-button>
-
 					<b-list-group>
-						<b-list-group-item class="TemplateCreate__survey__item" v-for="(survey, i) in surveys" :key="i">
+						<b-list-group-item class="TemplateCreate__module__item" v-for="(survey, i) in surveys" :key="i">
 
 							<span v-text="survey.name"/>
 
@@ -54,22 +53,37 @@
 
 						</b-list-group-item>
 					</b-list-group>
-
 				</b-card>
+
+				<b-card body-class="TemplateCreate__module" title="Information Modules">
+					<b-button
+						class="TemplateCreate__module__add"
+						variant="primary"
+						size="sm"
+						@click="onNewSurveyClick">
+						Add Information Module
+					</b-button>
+					<b-list-group>
+						<b-list-group-item class="TemplateCreate__module__item" v-for="(survey, i) in surveys" :key="i">
+							<span v-text="survey.name"/>
+							<span @click="deleteSurvey(i)">
+								<icon class="cursor-pointer" name="trash-alt" />
+							</span>
+						</b-list-group-item>
+					</b-list-group>
+				</b-card>
+
 			</b-col>
 		</b-row>
 
 		<section class="TemplateCreate__submit">
-
 			<b-button
 				variant="outline-primary"
 				:disabled="!isPrescriptionTemplateValid"
 				@click="submit">
 				Publish Prescription Template
 			</b-button>
-
 			<p class="text-danger TemplateCreate__submit--text" v-text="errorText"/>
-
 		</section>
 
 		<survey-create-modal
@@ -165,7 +179,7 @@ export default {
 		}
 	}
 
-	&__survey {
+	&__module {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
