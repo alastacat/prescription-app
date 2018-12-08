@@ -1,48 +1,62 @@
 <template>
 	<div class="TemplateList">
-		<h2 class="App__title">View Prescription Templates</h2>
 
-		<section class="TemplateList__info">
+		<template v-if="isLoading">
+			<icon class="App__loader" name="spinner" />
+		</template>
 
-			<span>Click a Prescription Template to view its details.</span>
+		<template v-else>
+			<h2 class="App__title">View Prescription Templates</h2>
 
-			<b-button
-				:to="{ name: 'prescriptionTemplate.create' }"
-				variant="primary"
-				size="sm">
-				Create Prescription Template
-			</b-button>
+			<section class="TemplateList__info">
 
-		</section>
+				<span>Click a Prescription Template to view its details.</span>
 
-		<b-card class="App__card">
+				<b-button
+					:to="{ name: 'prescriptionTemplate.create' }"
+					variant="primary"
+					size="sm">
+					Create Prescription Template
+				</b-button>
 
-			<b-button v-b-toggle.prescriptionListFilters size="sm" variant="outline">Filters</b-button>
-			<b-collapse id="prescriptionListFilters">
-				<b-card>
-					<b-form-group
-						label="Author:"
-						label-for="authorFilter">
-						<b-form-input id="authorFilter" v-model="authorFilter"/>
-					</b-form-group>
-				</b-card>
-			</b-collapse>
+			</section>
 
-			<b-table
-				class="TemplateList__table"
-				:items="prescriptionTemplates"
-				:fields="fields"
-				hover
-				@row-clicked="goToTemplate">
-				<template slot="surveys" slot-scope="data">
-					<span v-if="data.item.surveys" v-text="data.item.surveys.length"/>
-					<span v-else v-text="'0'"/>
-				</template>
-			</b-table>
+			<b-card class="App__card">
 
-		</b-card>
+				<b-button v-b-toggle.prescriptionListFilters size="sm" variant="outline">Filters</b-button>
+				<b-collapse id="prescriptionListFilters">
+					<b-card>
+						<b-form-group
+							label="Author:"
+							label-for="authorFilter">
+							<b-form-input id="authorFilter" v-model="authorFilter"/>
+						</b-form-group>
+					</b-card>
+				</b-collapse>
+
+				<b-table
+					class="TemplateList__table"
+					:items="prescriptionTemplates"
+					:fields="fields"
+					hover
+					@row-clicked="goToTemplate">
+
+					<template slot="Survey Modules" slot-scope="data">
+						<span v-if="data.item.modules" v-text="data.item.modules.filter(m => m.type === 'survey').length"/>
+						<span v-else v-text="'0'"/>
+					</template>
+
+					<template slot="Information Modules" slot-scope="data">
+						<span v-if="data.item.modules" v-text="data.item.modules.filter(m => m.type === 'information').length"/>
+						<span v-else v-text="'0'"/>
+					</template>
+
+				</b-table>
+
+			</b-card>
+		</template>
+
 	</div>
-
 </template>
 
 <script>
@@ -52,9 +66,11 @@ import { throttle as _throttle } from 'lodash';
 export default {
 	data() {
 		return {
+			isLoading: false,
 			fields: [
 				{ key: 'name' },
-				{ key: 'surveys' },
+				{ key: 'Survey Modules' },
+				{ key: 'Information Modules' },
 				{ key: 'description' },
 				{ key: 'author' },
 			],
@@ -71,11 +87,13 @@ export default {
 			fetchPrescriptionTemplates: 'prescription-template/find'
 		}),
 		async fetch() {
+			this.isLoading = true;
 			if (this.authorFilter) {
 				await this.fetchPrescriptionTemplates({ author: this.authorFilter })
-				return;
+			} else {
+				await this.fetchPrescriptionTemplates();
 			}
-			this.fetchPrescriptionTemplates();
+			this.isLoading = false;
 		},
 		goToTemplate(template) {
 			this.$router.push({ name: 'prescriptionTemplate.detail', params: { id: template._id } });

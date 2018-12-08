@@ -76,6 +76,19 @@ export default {
 		text-align: left;
 	}
 
+	&__label {
+		align-self: flex-start;
+		font-weight: bold;
+		text-transform: uppercase;
+		display: block;
+		text-align: left;
+
+		&--inline {
+			display: inline-block;
+			margin-right: 1rem;
+		}
+	}
+
 	&__loader {
 		width: 3rem;
 		height: 3rem;

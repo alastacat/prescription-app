@@ -4,6 +4,11 @@ import Create from './Create';
 
 const routes = [
 	{
+		name: 'prescriptionTemplate.create',
+		path: '/prescription-templates/create',
+		component: Create,
+	},
+	{
 		name: 'prescriptionTemplate.list',
 		path: '/prescription-templates',
 		component: List,
@@ -12,11 +17,6 @@ const routes = [
 		name: 'prescriptionTemplate.detail',
 		path: '/prescription-templates/:id',
 		component: Detail,
-	},
-	{
-		name: 'prescriptionTemplate.create',
-		path: '/prescription-templates/create',
-		component: Create,
 	}
 ];
 

@@ -1,99 +1,103 @@
 <template>
 	<div class="TemplateCreate">
-		<h2 class="App__title">Create Prescription Template</h2>
 
-		<b-row class="TemplateCreate__content">
-			<b-col>
-				<b-card title="Details">
+		<template v-if="isLoading">
+			<icon class="App__loader" name="spinner" />
+		</template>
 
-					<b-form-group
-						class="TemplateCreate__formGroup"
-						label="Author:"
-						label-for="templateAuthor"
-						horizontal>
-						<b-form-input id="templateAuthor" :value="author" disabled/>
-					</b-form-group>
+		<template v-else>
+			<h2 class="App__title">Create Prescription Template</h2>
 
-					<b-form-group
-						class="TemplateCreate__formGroup"
-						label="Name:"
-						label-for="templateName"
-						horizontal>
-						<b-form-input id="templateName" v-model.trim="name"/>
-					</b-form-group>
+			<b-row class="TemplateCreate__content">
+				<b-col>
+					<b-card title="Details">
 
-					<b-form-group
-						class="TemplateCreate__formGroup"
-						label="Description:"
-						label-for="templateDescription"
-						horizontal>
-						<b-form-textarea id="templateDescription" v-model="description" :rows="3"/>
-					</b-form-group>
+						<b-form-group
+							class="TemplateCreate__formGroup"
+							label="Author:"
+							label-for="templateAuthor"
+							horizontal>
+							<b-form-input id="templateAuthor" :value="author" disabled/>
+						</b-form-group>
 
-				</b-card>
-			</b-col>
-			<b-col>
-				<b-card body-class="TemplateCreate__survey" title="Surveys">
+						<b-form-group
+							class="TemplateCreate__formGroup"
+							label="Name:"
+							label-for="templateName"
+							horizontal>
+							<b-form-input id="templateName" v-model.trim="name"/>
+						</b-form-group>
 
-					<b-button
-						class="TemplateCreate__survey__add"
-						variant="primary"
-						size="sm"
-						@click="onNewSurveyClick">
-						Add Survery
-					</b-button>
+						<b-form-group
+							class="TemplateCreate__formGroup"
+							label="Description:"
+							label-for="templateDescription"
+							horizontal>
+							<b-form-textarea id="templateDescription" v-model="description" :rows="3"/>
+						</b-form-group>
 
-					<b-list-group>
-						<b-list-group-item class="TemplateCreate__survey__item" v-for="(survey, i) in surveys" :key="i">
+					</b-card>
+				</b-col>
+				<b-col>
 
-							<span v-text="survey.name"/>
+					<b-card body-class="TemplateCreate__module" title="Modules">
+						<b-button
+							class="TemplateCreate__module__add"
+							variant="primary"
+							size="sm"
+							@click="onNewModuleClick">
+							Add Module
+						</b-button>
+						<b-list-group>
+							<b-list-group-item class="TemplateCreate__module__item" v-for="(mod, i) in modules" :key="i">
 
-							<span @click="deleteSurvey(i)">
-								<icon class="cursor-pointer" name="trash-alt" />
-							</span>
+								<span v-text="mod.name"/>
 
-						</b-list-group-item>
-					</b-list-group>
+								<span @click="deleteModule(i)">
+									<icon class="cursor-pointer" name="trash-alt" />
+								</span>
 
-				</b-card>
-			</b-col>
-		</b-row>
+							</b-list-group-item>
+						</b-list-group>
+					</b-card>
 
-		<section class="TemplateCreate__submit">
+				</b-col>
+			</b-row>
 
-			<b-button
-				variant="outline-primary"
-				:disabled="!isPrescriptionTemplateValid"
-				@click="submit">
-				Publish Prescription Template
-			</b-button>
+			<section class="TemplateCreate__submit">
+				<b-button
+					variant="outline-primary"
+					:disabled="!isPrescriptionTemplateValid"
+					@click="submit">
+					Publish Prescription Template
+				</b-button>
+				<p class="text-danger TemplateCreate__submit--text" v-text="errorText"/>
+			</section>
 
-			<p class="text-danger TemplateCreate__submit--text" v-text="errorText"/>
-
-		</section>
-
-		<survey-create-modal
-			:visible="isAddSurveyModalVisible"
-			@submit="onNewSurveySubmit"
-			@close="onSurveyCreateModalClose"/>
+			<module-create-modal
+				:visible="isModuleCreateModalVisible"
+				@submit="onModuleCreateModalSubmit"
+				@close="onModuleCreateModalClose"/>
+		</template>
 
 	</div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import SurveyCreateModal from './components/SurveyCreate.modal';
+import ModuleCreateModal from './components/ModuleCreateModal';
 
 export default {
 	components: {
-		SurveyCreateModal
+		ModuleCreateModal
 	},
 	data() {
 		return {
+			isLoading: false,
 			name: null,
 			description: null,
-			surveys: [],
-			isAddSurveyModalVisible: false,
+			modules: [],
+			isModuleCreateModalVisible: false,
 			errorText: null
 		}
 	},
@@ -114,11 +118,12 @@ export default {
 			submitTemplate: 'prescription-template/submit'
 		}),
 		async submit() {
+			this.isLoading = true;
 			const prescription = {
 				author: this.author,
 				name: this.name,
 				description: this.description,
-				surveys: this.surveys
+				modules: this.modules
 			}
 			try {
 				await this.submitTemplate(prescription);
@@ -126,18 +131,19 @@ export default {
 			} catch (err) {
 				this.errorText = err.message;
 			}
+			this.isLoading = false;
 		},
-		onNewSurveyClick() {
-			this.isAddSurveyModalVisible = true;
+		onNewModuleClick() {
+			this.isModuleCreateModalVisible = true;
 		},
-		onSurveyCreateModalClose() {
-			this.isAddSurveyModalVisible = false;
+		onModuleCreateModalClose() {
+			this.isModuleCreateModalVisible = false;
 		},
-		onNewSurveySubmit(newSurvey) {
-			this.surveys.push(newSurvey);
+		onModuleCreateModalSubmit(newModule) {
+			this.modules.push(newModule);
 		},
-		deleteSurvey(i) {
-			this.surveys.splice(i, 1);
+		deleteModule(i) {
+			this.modules.splice(i, 1);
 		}
 	}
 }
@@ -165,7 +171,7 @@ export default {
 		}
 	}
 
-	&__survey {
+	&__module {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
