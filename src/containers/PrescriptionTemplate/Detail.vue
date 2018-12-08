@@ -8,7 +8,19 @@
 		<template v-else>
 
 			<h2 class="App__title" v-text="`Prescription Template: ${prescriptionTemplate.name}`"/>
-			<h5 class="TemplateDetail__author" v-text="prescriptionTemplate.author"/>
+
+			<section class="App__info mb-3">
+
+				<h5 class="TemplateDetail__author" v-text="prescriptionTemplate.author"/>
+
+				<!-- <b-button
+					:to="{ name: 'prescription.create' }"
+					variant="primary"
+					size="sm">
+					Create Prescription
+				</b-button> -->
+
+			</section>
 
 			<section class="TemplateDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">Description:</span>
@@ -79,7 +91,6 @@ export default {
 
 	&__author {
 		align-self: flex-start;
-		margin-bottom: 2rem;
 	}
 
 	&__content {
@@ -96,6 +107,7 @@ export default {
 		padding: 1rem;
 		text-align: left;
 	}
+
 
 	&__modules {
 		width: 100%;
