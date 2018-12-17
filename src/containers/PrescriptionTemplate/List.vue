@@ -1,39 +1,40 @@
 <template>
 	<div class="TemplateList">
 
-		<template v-if="isLoading">
-			<icon class="App__loader" name="spinner" />
-		</template>
+		<h2 class="App__title">View Prescription Templates</h2>
 
-		<template v-else>
-			<h2 class="App__title">View Prescription Templates</h2>
+		<section class="App__info">
 
-			<section class="TemplateList__info">
+			<span>Click a Prescription Template to view its details.</span>
 
-				<span>Click a Prescription Template to view its details.</span>
+			<b-button
+				:to="{ name: 'prescriptionTemplate.create' }"
+				variant="primary"
+				size="sm">
+				Create Prescription Template
+			</b-button>
 
-				<b-button
-					:to="{ name: 'prescriptionTemplate.create' }"
-					variant="primary"
-					size="sm">
-					Create Prescription Template
-				</b-button>
+		</section>
 
-			</section>
+		<b-card class="App__card">
 
-			<b-card class="App__card">
+			<b-button v-b-toggle.prescriptionListFilters size="sm" variant="outline-secondary">Filters</b-button>
+			<b-collapse id="prescriptionListFilters">
+				<b-card>
+					<b-form-group
+						label="Author:"
+						label-for="authorFilter">
+						<b-form-input id="authorFilter" v-model="authorFilter"/>
+					</b-form-group>
+				</b-card>
+			</b-collapse>
 
-				<b-button v-b-toggle.prescriptionListFilters size="sm" variant="outline">Filters</b-button>
-				<b-collapse id="prescriptionListFilters">
-					<b-card>
-						<b-form-group
-							label="Author:"
-							label-for="authorFilter">
-							<b-form-input id="authorFilter" v-model="authorFilter"/>
-						</b-form-group>
-					</b-card>
-				</b-collapse>
 
+			<template v-if="isLoading">
+				<icon class="App__loader my-3" name="spinner" />
+			</template>
+
+			<template v-else>
 				<b-table
 					class="TemplateList__table"
 					:items="prescriptionTemplates"
@@ -52,9 +53,10 @@
 					</template>
 
 				</b-table>
+			</template>
 
-			</b-card>
-		</template>
+		</b-card>
+
 
 	</div>
 </template>
@@ -119,12 +121,6 @@ export default {
 .TemplateList {
 	@extend .flexbox;
 	padding: 1rem;
-
-	&__info {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-	}
 
 	&__table {
 		tbody {

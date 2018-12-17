@@ -24,6 +24,14 @@
 
 				<b-form-group
 					class="text-align-left"
+					label="Days to repeat:"
+					label-for="newModuleRepeatDays"
+					horizontal>
+					<b-form-input type="number" id="newModuleRepeatDays" v-model="repeatDays"/>
+				</b-form-group>
+
+				<b-form-group
+					class="text-align-left"
 					label="Type:"
 					label-for="newModuleType"
 					horizontal>
@@ -31,7 +39,7 @@
 				</b-form-group>
 			</section>
 
-			<section>
+			<section class="p-3 border rounded">
 
 				<template v-if="type==='survey'">
 					<section class="NewModule__newTextEntry">
@@ -66,12 +74,6 @@
 							class="NewModule__newTextEntry--input"
 							v-model.trim="photoUrl"
 							placeholder="Add a photo's url to add an image..."/>
-						<!-- <b-button
-							v-text="'Add Photo'"
-							:disabled="!isNewPhotoValid"
-							variant="primary"
-							size="sm"
-							@click="onAddPhotoClick"/> -->
 					</section>
 				</template>
 
@@ -128,7 +130,8 @@ export default {
 	data() {
 		return {
 			name: null,
-			type: null,
+			repeatDays: 7,
+			type: 'survey',
 			newQuestion: null,
 			newInformation: null,
 			questions: [],
@@ -163,10 +166,16 @@ export default {
 			return null;
 		},
 		isNewModuleValid() {
-			if (!this.name) return false;
-			if (!this.type) return false;
-			if (this.type === 'survey' && this.questions.length === 0) return false;
-			if (this.type === 'information' && this.information.length === 0) return false;
+			if (!this.name ||
+				!this.repeatDays ||
+				this.type
+			) return false;
+			if (this.type === 'survey') {
+				if (this.questions.length === 0) return false;
+			}
+			if (this.type === 'information') {
+				if (this.information.length === 0) return false;
+			}
 			return true;
 		}
 	},
@@ -174,6 +183,7 @@ export default {
 		addModule() {
 			this.$emit('submit', {
 				name: this.name,
+				repeatDays: this.repeatDays,
 				type: this.type,
 				questions: this.questions,
 				information: this.information,

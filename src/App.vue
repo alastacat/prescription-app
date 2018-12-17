@@ -70,6 +70,12 @@ export default {
 		margin-bottom: 1rem;
 	}
 
+	&__info {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+
 	&__card {
 		margin: 1rem;
 		width: 100%;
@@ -93,6 +99,19 @@ export default {
 		width: 3rem;
 		height: 3rem;
 		animation: spin 1000ms linear infinite;
+
+		&.fa-icon {
+			display: flex;
+			margin: auto;
+		}
+	}
+
+	&__formGroup {
+		width: 100%;
+
+		.col-form-label {
+			text-align: left;
+		}
 	}
 }
 
