@@ -1,0 +1,111 @@
+{
+	"prescription-templates" : {
+	  "-LRYZ4_HiHstHC8cawLr" : {
+		"author" : "Mr. Michael Fitzhavey",
+		"description" : "This prescription template is a test.",
+		"modules" : [ {
+		  "name" : "test-survey",
+		  "questions" : [ "Does this work?", "What changes do we want to see?", "What do we like about it that what want to emphasize in future changes?" ],
+		  "type" : "survey"
+		} ],
+		"name" : "test-prescription-template"
+	  },
+	  "-LRYw2J_FWg5eETGMU71" : {
+		"author" : "Dr. Alastair Catto",
+		"description" : "Test app ",
+		"modules" : [ {
+		  "name" : "Test symptom tracker",
+		  "questions" : [ "Test- how is your pain level on 0-10 scale?", "Test- what is your dose of ibuprofen?" ],
+		  "type" : "survey"
+		} ],
+		"name" : "Test app"
+	  },
+	  "-LS6Lzd6oh3AuMxRuvTc" : {
+		"author" : "Mr. Michael Fitzhavey",
+		"description" : "a thing",
+		"modules" : [ {
+		  "name" : "a",
+		  "questions" : [ "you k?" ],
+		  "type" : "survey"
+		} ],
+		"name" : "things"
+	  },
+	  "-LSkMTq09bhAaDHw9WoW" : {
+		"author" : "Mr. Michael Fitzhavey",
+		"modules" : [ {
+		  "name" : "Survey 1",
+		  "questions" : [ "Is this a good test question?" ],
+		  "type" : "survey"
+		}, {
+		  "name" : "Survey 2",
+		  "questions" : [ "Is this another good test question?" ],
+		  "type" : "survey"
+		} ],
+		"name" : "Test Prescription with Two Surveys"
+	  },
+	  "-LT48DaESDEQvypL_WbE" : {
+		"author" : "Mr. Michael Fitzhavey",
+		"modules" : [ {
+		  "information" : [ "fact A", "fact B" ],
+		  "name" : "Information Module",
+		  "type" : "information"
+		}, {
+		  "name" : "survey-module",
+		  "questions" : [ "another test question" ],
+		  "type" : "survey"
+		} ],
+		"name" : "test-prescription-with-info"
+	  },
+	  "-LTDSPxCWfLJtdEtxTLn" : {
+		"author" : "Mr. Michael Fitzhavey",
+		"modules" : [ {
+		  "information" : [ "This module should contain a photo" ],
+		  "name" : "photoUrl-test",
+		  "photoUrl" : "https://m.media-amazon.com/images/M/MV5BMTgxNTIyNDcyMl5BMl5BanBnXkFtZTcwNjExNzQzNg@@._V1_SY1000_CR0,0,706,1000_AL_.jpg",
+		  "type" : "information"
+		} ],
+		"name" : "photo-test"
+	  },
+	  "-LTDV6Es_cF8SOcv3d1D" : {
+		"author" : "Mr. Michael Fitzhavey",
+		"description" : "This prescription is the first to be submitted with the new submission interface. It also has a photo attached to an info module.",
+		"modules" : [ {
+		  "information" : [ "example fact" ],
+		  "name" : "photo-demo",
+		  "photoUrl" : "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		  "type" : "information"
+		} ],
+		"name" : "Testing Images and Loading State"
+	  },
+	  "-LTMPiVHYsVdDpk8E3MC" : {
+		"author" : "Dr. Alastair Catto",
+		"description" : "Test prescription for new functionality in the web application. ",
+		"modules" : [ {
+		  "information" : [ "Information 1" ],
+		  "name" : "Test app",
+		  "questions" : [ "Question 1", "Question 2" ],
+		  "type" : "survey"
+		}, {
+		  "information" : [ "Information 1" ],
+		  "name" : "Test2",
+		  "photoUrl" : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/180px-Messagebox_info.svg.png",
+		  "type" : "information"
+		} ],
+		"name" : "TestPrescription"
+	  }
+	},
+	"users" : {
+	  "QZ0NLTmTQXVzIDwpehDw3i60p1w1" : {
+		"email" : "test@gmail.com",
+		"firstName" : "Alastair",
+		"lastName" : "Catto",
+		"title" : "Dr"
+	  },
+	  "wNY7aAp459RCbfRdFG2ewBH4lV63" : {
+		"email" : "michael.fitzhavey@gmail.com",
+		"firstName" : "Michael",
+		"lastName" : "Fitzhavey",
+		"title" : "Mr"
+	  }
+	}
+  }

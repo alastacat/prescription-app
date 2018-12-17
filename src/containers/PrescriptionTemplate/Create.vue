@@ -13,7 +13,7 @@
 					<b-card title="Details">
 
 						<b-form-group
-							class="TemplateCreate__formGroup"
+							class="App__formGroup"
 							label="Author:"
 							label-for="templateAuthor"
 							horizontal>
@@ -21,7 +21,7 @@
 						</b-form-group>
 
 						<b-form-group
-							class="TemplateCreate__formGroup"
+							class="App__formGroup"
 							label="Name:"
 							label-for="templateName"
 							horizontal>
@@ -29,12 +29,21 @@
 						</b-form-group>
 
 						<b-form-group
-							class="TemplateCreate__formGroup"
+							class="App__formGroup"
 							label="Description:"
 							label-for="templateDescription"
 							horizontal>
 							<b-form-textarea id="templateDescription" v-model="description" :rows="3"/>
 						</b-form-group>
+
+						<b-form-group
+							class="App__formGroup"
+							label="Survey Duration (weeks):"
+							label-for="templateLength"
+							horizontal>
+							<b-form-input type="number" id="templateLength" v-model="durationWeeks"/>
+						</b-form-group>
+
 
 					</b-card>
 				</b-col>
@@ -78,6 +87,7 @@
 				:visible="isModuleCreateModalVisible"
 				@submit="onModuleCreateModalSubmit"
 				@close="onModuleCreateModalClose"/>
+
 		</template>
 
 	</div>
@@ -96,6 +106,7 @@ export default {
 			isLoading: false,
 			name: null,
 			description: null,
+			durationWeeks: 4,
 			modules: [],
 			isModuleCreateModalVisible: false,
 			errorText: null
@@ -109,7 +120,11 @@ export default {
 			return `${this.account.title}. ${this.account.firstName} ${this.account.lastName}`
 		},
 		isPrescriptionTemplateValid() {
-			if (!this.name) return false;
+			if (
+				!this.name ||
+				!this.durationWeeks ||
+				this.modules.length === 0
+			) return false;
 			return true;
 		}
 	},
@@ -123,6 +138,7 @@ export default {
 				author: this.author,
 				name: this.name,
 				description: this.description,
+				durationWeeks: this.durationWeeks,
 				modules: this.modules
 			}
 			try {

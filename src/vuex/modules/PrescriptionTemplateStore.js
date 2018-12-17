@@ -7,12 +7,8 @@ export default {
 		prescriptionTemplates: []
 	},
 	mutations: {
-		SET_PRESCRIPTION_TEMPLATE(state, result, id) {
-			const prescripionTemplate = {
-				...result,
-				_id: id
-			}
-			state.prescriptionTemplate = prescripionTemplate;
+		SET_PRESCRIPTION_TEMPLATE(state, result) {
+			state.prescriptionTemplate = result;
 		},
 		SET_PRESCRIPTION_TEMPLATES(state, result) {
 			if (!result) {
@@ -20,7 +16,6 @@ export default {
 				return;
 			}
 			const prescriptionTemplates = [];
-			// Attach the ids to the prescription template objects
 			Object.keys(result).forEach(key => {
 				prescriptionTemplates.push({
 					...result[key],
@@ -51,7 +46,7 @@ export default {
 			const ref = rootState.db.ref(path);
 			const snap = await ref.once('value');
 			const data = snap.val();
-			commit('SET_PRESCRIPTION_TEMPLATE', data, id);
+			commit('SET_PRESCRIPTION_TEMPLATE', { ...data, _id: id });
 		}
 
 	},

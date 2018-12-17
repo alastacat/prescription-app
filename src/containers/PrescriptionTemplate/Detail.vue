@@ -13,18 +13,23 @@
 
 				<h5 class="TemplateDetail__author" v-text="prescriptionTemplate.author"/>
 
-				<!-- <b-button
-					:to="{ name: 'prescription.create' }"
+				<b-button
+					:to="{ name: 'prescription.create', query: { templateId: prescriptionTemplate._id } }"
 					variant="primary"
 					size="sm">
-					Create Prescription
-				</b-button> -->
+					Create Prescription from Template
+				</b-button>
 
 			</section>
 
 			<section class="TemplateDetail__content">
+				<span class="App__label App__label--inline mt-3 w-25">Duration (weeks):</span>
+				<span class="TemplateDetail__field" v-text="prescriptionTemplate.durationWeeks"/>
+			</section>
+
+			<section class="TemplateDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">Description:</span>
-				<span class="TemplateDetail__description" v-text="prescriptionTemplate.description"/>
+				<span class="TemplateDetail__field TemplateDetail__field--tall" v-text="prescriptionTemplate.description"/>
 			</section>
 
 			<section class="TemplateDetail__content">
@@ -40,6 +45,13 @@
 
 			</section>
 
+			<section class="TemplateDetail__content mb-0">
+				<span class="App__label App__label--inline mt-3 w-25">If started on:</span>
+				<datepicker class="TemplateDetail__field" placeholder="Select Start Date" v-model="exampleStartDate"/>
+			</section>
+
+			<schedule :today="exampleStartDate"/>
+
 		</template>
 
 	</div>
@@ -47,15 +59,20 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import Datepicker from 'vuejs-datepicker';
 import ModuleDetail from './components/ModuleDetail';
+import Schedule from './components/Schedule';
 
 export default {
 	components: {
-		ModuleDetail
+		ModuleDetail,
+		Schedule,
+		Datepicker
 	},
 	data() {
 		return {
-			isLoading: true
+			isLoading: true,
+			exampleStartDate: new Date()
 		}
 	},
 	computed: {
@@ -100,12 +117,15 @@ export default {
 		margin-bottom: 1rem;
 	}
 
-	&__description {
+	&__field {
 		width: 100%;
-		min-height: 100px;
 		background: $white-true;
 		padding: 1rem;
 		text-align: left;
+
+		&--tall {
+			min-height: 100px;
+		}
 	}
 
 

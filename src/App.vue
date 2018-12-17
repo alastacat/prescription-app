@@ -105,6 +105,14 @@ export default {
 			margin: auto;
 		}
 	}
+
+	&__formGroup {
+		width: 100%;
+
+		.col-form-label {
+			text-align: left;
+		}
+	}
 }
 
 @keyframes spin {

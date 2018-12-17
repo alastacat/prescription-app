@@ -4,7 +4,8 @@
 		@click="onModuleDetailClick">
 
 		<h5 class="ModuleDetail__title" v-text="module.name"/>
-		<div class="ModuleDetail__type">
+
+		<div class="ModuleDetail__field">
 			<span class="App__label App__label--inline">type:</span>
 			<span v-text="module.type"/>
 		</div>
@@ -17,9 +18,14 @@
 			centered
 			@hidden="onModuleDetailModalClose">
 
-			<div class="ModuleDetail__type mb-3">
-				<span class="App__label App__label--inline">type:</span>
+			<div class="ModuleDetail__field mb-3">
+				<span class="App__label App__label--inline">Type:</span>
 				<span v-text="module.type"/>
+			</div>
+
+			<div class="ModuleDetail__field mb-3">
+				<span class="App__label App__label--inline">Repeat (days):</span>
+				<span v-text="module.repeatDays"/>
 			</div>
 
 			<div>
@@ -80,6 +86,7 @@ export default {
 		}
 	}
 }
+
 </script>
 
 <style lang="scss">
@@ -98,7 +105,7 @@ export default {
 		text-align: left;
 	}
 
-	&__type {
+	&__field {
 		@extend .flexbox;
 		font-size: 0.8rem;
 		flex-direction: row;
