@@ -168,7 +168,7 @@ export default {
 		isNewModuleValid() {
 			if (!this.name ||
 				!this.repeatDays ||
-				this.type
+				!this.type
 			) return false;
 			if (this.type === 'survey') {
 				if (this.questions.length === 0) return false;
