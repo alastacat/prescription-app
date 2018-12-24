@@ -9,7 +9,7 @@ const routes = [
 	{
 		path: '/',
 		redirect: {
-			name: 'prescriptionTemplate.list'
+			name: 'template.list'
 		}
 	},
 	{

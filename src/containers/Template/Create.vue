@@ -143,7 +143,7 @@ export default {
 			}
 			try {
 				await this.submitTemplate(prescription);
-				this.$router.push({ name: 'prescriptionTemplate.list' });
+				this.$router.push({ name: 'template.list' });
 			} catch (err) {
 				this.errorText = err.message;
 			}

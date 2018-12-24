@@ -8,7 +8,7 @@
 			<span>Click a Prescription Template to view its details.</span>
 
 			<b-button
-				:to="{ name: 'prescriptionTemplate.create' }"
+				:to="{ name: 'template.create' }"
 				variant="primary"
 				size="sm">
 				Create Prescription Template
@@ -98,7 +98,7 @@ export default {
 			this.isLoading = false;
 		},
 		goToTemplate(template) {
-			this.$router.push({ name: 'prescriptionTemplate.detail', params: { id: template._id } });
+			this.$router.push({ name: 'template.detail', params: { id: template._id } });
 		}
 	},
 	created() {
