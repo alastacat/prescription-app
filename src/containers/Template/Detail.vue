@@ -7,14 +7,14 @@
 
 		<template v-else>
 
-			<h2 class="App__title" v-text="`Prescription Template: ${prescriptionTemplate.name}`"/>
+			<h2 class="App__title" v-text="`Prescription Template: ${template.name}`"/>
 
 			<section class="App__info mb-3">
 
-				<h5 class="TemplateDetail__author" v-text="prescriptionTemplate.author"/>
+				<h5 class="TemplateDetail__author" v-text="template.author"/>
 
 				<b-button
-					:to="{ name: 'prescription.create', query: { templateId: prescriptionTemplate._id } }"
+					:to="{ name: 'prescription.create', query: { templateId: template._id } }"
 					variant="primary"
 					size="sm">
 					Create Prescription from Template
@@ -24,12 +24,12 @@
 
 			<section class="TemplateDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">Duration (weeks):</span>
-				<span class="TemplateDetail__field" v-text="prescriptionTemplate.durationWeeks"/>
+				<span class="TemplateDetail__field" v-text="template.durationWeeks"/>
 			</section>
 
 			<section class="TemplateDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">Description:</span>
-				<span class="TemplateDetail__field TemplateDetail__field--tall" v-text="prescriptionTemplate.description"/>
+				<span class="TemplateDetail__field TemplateDetail__field--tall" v-text="template.description"/>
 			</section>
 
 			<section class="TemplateDetail__content">
@@ -38,7 +38,7 @@
 				<div class="TemplateDetail__modules">
 					<module-detail
 						class="TemplateDetail__module"
-						v-for="(module, i) in prescriptionTemplate.modules"
+						v-for="(module, i) in template.modules"
 						:key="i"
 						:module="module"/>
 				</div>
@@ -77,12 +77,12 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			prescriptionTemplate: 'prescription-template/prescription-template'
+			template: 'template/template'
 		})
 	},
 	methods: {
 		...mapActions({
-			fetchPrescriptionTemplate: 'prescription-template/get'
+			fetchPrescriptionTemplate: 'template/get'
 		}),
 		async fetch() {
 			this.isLoading = true;
