@@ -1,5 +1,5 @@
 import accountRoutes from '../containers/Account';
-import prescriptionTemplateroutes from '../containers/PrescriptionTemplate';
+import prescriptionTemplateroutes from '../containers/Template';
 import prescriptionRoutes from '../containers/Prescription';
 
 const routes = [
@@ -9,7 +9,7 @@ const routes = [
 	{
 		path: '/',
 		redirect: {
-			name: 'prescriptionTemplate.list'
+			name: 'template.list'
 		}
 	},
 	{

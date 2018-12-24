@@ -9,13 +9,13 @@ const routes = [
 		component: Create,
 	}
 	// {
-	// 	name: 'prescriptionTemplate.list',
-	// 	path: '/prescription-templates',
+	// 	name: 'template.list',
+	// 	path: '/templates',
 	// 	component: List,
 	// },
 	// {
-	// 	name: 'prescriptionTemplate.detail',
-	// 	path: '/prescription-templates/:id',
+	// 	name: 'template.detail',
+	// 	path: '/templates/:id',
 	// 	component: Detail,
 	// }
 ];

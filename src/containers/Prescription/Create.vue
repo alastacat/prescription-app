@@ -43,10 +43,10 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			prescriptionTemplates: 'prescription-template/prescription-templates'
+			templates: 'template/templates'
 		}),
 		templateOptions() {
-			return this.prescriptionTemplates.map(t => {
+			return this.templates.map(t => {
 				return {
 					text: t.name,
 					value: t._id
@@ -56,7 +56,7 @@ export default {
 	},
 	methods: {
 		...mapActions({
-			fetchPrescriptionTemplates: 'prescription-template/find'
+			fetchTemplates: 'prescription-template/find'
 		}),
 		setTemplateIdFromRoute() {
 			this.templateId = this.$route.query.templateId;
@@ -65,7 +65,7 @@ export default {
 	},
 	created() {
 		this.setTemplateIdFromRoute();
-		this.fetchPrescriptionTemplates(); // #Todo: only load templates when user searching for / changing them
+		this.fetchTemplates(); // #Todo: only load templates when user searching for / changing them
 	},
 	watch: {
 		$route() {
