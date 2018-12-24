@@ -101,14 +101,12 @@ export default {
 	data() {
 		return {
 			selectedDate: moment(),
+			dateContext: moment(this.date),
 			days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 		}
 	},
 	computed: {
 		today: function() {
-			return moment(this.date);
-		},
-		dateContext: function() {
 			return moment(this.date);
 		},
 		year: function() {
