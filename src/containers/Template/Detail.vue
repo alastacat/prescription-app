@@ -7,7 +7,7 @@
 
 		<template v-else>
 
-			<h2 class="App__title" v-text="`Prescription Template: ${template.name}`"/>
+			<h2 class="App__title" v-text="`Template: ${template.name}`"/>
 
 			<section class="App__info mb-3">
 
@@ -82,12 +82,12 @@ export default {
 	},
 	methods: {
 		...mapActions({
-			fetchPrescriptionTemplate: 'template/get'
+			fetchTemplate: 'template/get'
 		}),
 		async fetch() {
 			this.isLoading = true;
 			const id = this.$route.params.id;
-			await this.fetchPrescriptionTemplate(id);
+			await this.fetchTemplate(id);
 			this.isLoading = false;
 		}
 	},
