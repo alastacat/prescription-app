@@ -37,7 +37,7 @@
 			<template v-else>
 				<b-table
 					class="TemplateList__table"
-					:items="prescriptionTemplates"
+					:items="templates"
 					:fields="fields"
 					hover
 					@row-clicked="goToTemplate">
@@ -81,19 +81,19 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			prescriptionTemplates: 'prescription-template/prescription-templates'
+			templates: 'template/templates'
 		})
 	},
 	methods: {
 		...mapActions({
-			fetchPrescriptionTemplates: 'prescription-template/find'
+			fetchTemplates: 'template/find'
 		}),
 		async fetch() {
 			this.isLoading = true;
 			if (this.authorFilter) {
-				await this.fetchPrescriptionTemplates({ author: this.authorFilter })
+				await this.fetchTemplates({ author: this.authorFilter })
 			} else {
-				await this.fetchPrescriptionTemplates();
+				await this.fetchTemplates();
 			}
 			this.isLoading = false;
 		},

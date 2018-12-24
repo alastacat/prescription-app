@@ -1,28 +1,28 @@
-const MODULE = 'prescription-templates'
+const MODULE = 'templates'
 
 export default {
 	namespaced: true,
 	state: {
-		prescriptionTemplate: null,
-		prescriptionTemplates: []
+		template: null,
+		templates: []
 	},
 	mutations: {
-		SET_PRESCRIPTION_TEMPLATE(state, result) {
-			state.prescriptionTemplate = result;
+		SET_TEMPLATE(state, result) {
+			state.template = result;
 		},
-		SET_PRESCRIPTION_TEMPLATES(state, result) {
+		SET_TEMPLATES(state, result) {
 			if (!result) {
-				state.prescriptionTemplates = [];
+				state.templates = [];
 				return;
 			}
-			const prescriptionTemplates = [];
+			const templates = [];
 			Object.keys(result).forEach(key => {
-				prescriptionTemplates.push({
+				templates.push({
 					...result[key],
 					_id: key
 				})
 			})
-			state.prescriptionTemplates = prescriptionTemplates;
+			state.templates = templates;
 		}
 	},
 	actions: {
@@ -39,20 +39,20 @@ export default {
 			}
 			const snap = await ref.once('value');
 			const data = snap.val();
-			commit('SET_PRESCRIPTION_TEMPLATES', data);
+			commit('SET_TEMPLATES', data);
 		},
 		async get({rootState, commit}, id) {
 			const path = `${MODULE}/${id}`
 			const ref = rootState.db.ref(path);
 			const snap = await ref.once('value');
 			const data = snap.val();
-			commit('SET_PRESCRIPTION_TEMPLATE', { ...data, _id: id });
+			commit('SET_TEMPLATE', { ...data, _id: id });
 		}
 
 	},
 	getters: {
-		'prescription-template': state => state.prescriptionTemplate,
-		'prescription-templates': state => state.prescriptionTemplates
+		'template': state => state.template,
+		'templates': state => state.templates
 
 	}
 };

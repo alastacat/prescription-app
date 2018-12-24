@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import VuexPersistence from 'vuex-persist';
 
 import accountStore from './modules/AccountStore';
-import prescriptionTemplateStore from './modules/PrescriptionTemplateStore';
+import templateStore from './modules/TemplateStore';
 import prescriptionStore from './modules/PrescriptionStore';
 
 // Firebase connection. Since this info is public it's important to have security rules set.
@@ -32,7 +32,7 @@ const store = {
 	},
 	modules: {
 		account: accountStore,
-		'prescription-template': prescriptionTemplateStore,
+		template: templateStore,
 		prescription: prescriptionStore
 	},
 	plugins: [

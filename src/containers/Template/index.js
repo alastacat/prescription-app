@@ -10,7 +10,7 @@ const routes = [
 	},
 	{
 		name: 'template.list',
-		path: '/prescription-templates',
+		path: '/templates',
 		component: List,
 	},
 	{
