@@ -1,6 +1,10 @@
 # Prescription App
 
-## Build Setup
+## Local Development
+
+This project is made using [Vue.js](https://vuejs.org/) and uses [boostrap-vue](http://bootstrap-vue.js.org) for core components.
+
+### Build Setup
 
 ``` bash
 # install dependencies
