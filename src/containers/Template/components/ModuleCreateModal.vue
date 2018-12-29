@@ -60,14 +60,14 @@
 					<section class="NewModule__newTextEntry">
 						<b-form-input
 							class="NewModule__newTextEntry--input"
-							v-model.trim="newInformation"
-							placeholder="Add up to 5 pieces of information..."/>
+							v-model.trim="newFact"
+							placeholder="Add up to 5 facts..."/>
 						<b-button
-							v-text="'Add Information'"
-							:disabled="!isNewInformationValid"
+							v-text="'Add Fact'"
+							:disabled="!isNewFactValid"
 							variant="primary"
 							size="sm"
-							@click="onAddInformationClick"/>
+							@click="onAddFactClick"/>
 					</section>
 					<section class="NewModule__newTextEntry">
 						<b-form-input
@@ -96,9 +96,9 @@
 
 				<template v-if="type==='information'">
 					<b-list-group>
-						<b-list-group-item class="NewModule__textEntry" v-for="(info, i) in information" :key="i">
-							<span v-text="`${i+1}. ${info}`"/>
-							<span @click="deleteInformation(i)">
+						<b-list-group-item class="NewModule__textEntry" v-for="(fact, i) in facts" :key="i">
+							<span v-text="`${i+1}. ${fact}`"/>
+							<span @click="deleteFact(i)">
 								<icon class="cursor-pointer" name="trash-alt" />
 							</span>
 						</b-list-group-item>
@@ -133,9 +133,9 @@ export default {
 			repeatDays: 7,
 			type: 'survey',
 			newQuestion: null,
-			newInformation: null,
+			newFact: null,
 			questions: [],
-			information: [],
+			facts: [],
 			photoUrl: null,
 			typeOptions: [
 				'survey',
@@ -150,19 +150,19 @@ export default {
 			if (this.newQuestion.length > MAX_QUESTION_LENGTH) return false;
 			return true;
 		},
-		isNewInformationValid() {
-			if (!this.newInformation) return false;
-			if (this.information.length > 4) false;
-			if (this.newInformation.length > MAX_INFORMATION_LENGTH) return false;
+		isNewFactValid() {
+			if (!this.newFact) return false;
+			if (this.facts.length > 4) false;
+			if (this.newFact.length > MAX_INFORMATION_LENGTH) return false;
 			return true;
 		},
 		isNewPhotoValid() {
-			if (!this.newInformation) return false;
+			if (!this.newFact) return false;
 			return true;
 		},
 		errorText() {
 			if (this.newQuestion && this.newQuestion.length > MAX_QUESTION_LENGTH) return `Entry must be less than ${MAX_QUESTION_LENGTH} characters.`
-			if (this.newInformation && this.newInformation.length > MAX_QUESTION_LENGTH) return `Entry must be less than ${MAX_QUESTION_LENGTH} characters.`
+			if (this.newFact && this.newFact.length > MAX_QUESTION_LENGTH) return `Entry must be less than ${MAX_QUESTION_LENGTH} characters.`
 			return null;
 		},
 		isNewModuleValid() {
@@ -174,7 +174,7 @@ export default {
 				if (this.questions.length === 0) return false;
 			}
 			if (this.type === 'information') {
-				if (this.information.length === 0) return false;
+				if (this.facts.length === 0) return false;
 			}
 			return true;
 		}
@@ -185,13 +185,16 @@ export default {
 				name: this.name,
 				repeatDays: this.repeatDays,
 				type: this.type,
-				questions: this.questions,
-				information: this.information,
-				photoUrl: this.photoUrl
+				meta: {
+					questions: this.questions,
+					facts: this.facts,
+					photoUrl: this.photoUrl
+				}
 			});
+			// reset the component's values
 			this.name = null;
 			this.questions = [];
-			this.information = [];
+			this.facts = [];
 		},
 		close() {
 			this.$emit('close');
@@ -204,19 +207,19 @@ export default {
 		deleteQuestion(i) {
 			this.questions.splice(i, 1);
 		},
-		onAddInformationClick() {
-			this.information.push(this.newInformation);
-			this.newInformation = null;
+		onAddFactClick() {
+			this.facts.push(this.newFact);
+			this.newFact = null;
 		},
-		deleteInformation(i) {
-			this.information.splice(i, 1);
+		deleteFact(i) {
+			this.facts.splice(i, 1);
 		}
 	},
 	watch: {
 		type() {
 			if (this.type === 'survey') {
-				this.information = [];
-				this.newInformation = null;
+				this.fact = [];
+				this.newFact = null;
 				return;
 			}
 			if (this.type === 'information') {

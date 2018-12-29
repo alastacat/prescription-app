@@ -34,7 +34,7 @@
 					<b-list-group>
 						<b-list-group-item
 							v-if="module.type === 'survey'"
-							v-for="(question, i) in module.questions"
+							v-for="(question, i) in module.meta.questions"
 							:key="i"
 							v-text="`${i+1}. ${question}`"/>
 					</b-list-group>
@@ -44,13 +44,13 @@
 					<b-list-group class="mb-3">
 						<b-list-group-item
 							v-if="module.type === 'information'"
-							v-for="(fact, i) in module.information"
+							v-for="(fact, i) in module.meta.facts"
 							:key="i"
 							v-text="`${i+1}. ${fact}`"/>
 					</b-list-group>
 					<b-list-group>
 						<b-list-group-item class="p-0">
-							<b-img class="ModuleDetail__photo" :src="module.photoUrl"/>
+							<b-img class="ModuleDetail__photo" :src="module.meta.photoUrl"/>
 						</b-list-group-item>
 					</b-list-group>
 				</template>
