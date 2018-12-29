@@ -7,16 +7,16 @@
 
 		<template v-else>
 
-			<h2 class="App__title" v-text="`Prescription Template: ${prescriptionTemplate.name}`"/>
+			<h2 class="App__title" v-text="`Template: ${template.name}`"/>
 
 			<section class="App__info mb-3">
 
-				<h5 class="TemplateDetail__author" v-text="prescriptionTemplate.author"/>
+				<h5 class="TemplateDetail__author" v-text="template.author"/>
 
 				<b-button
-					:to="{ name: 'prescription.create', query: { templateId: prescriptionTemplate._id } }"
 					variant="primary"
-					size="sm">
+					size="sm"
+					@click="onCreatePrescriptionClick">
 					Create Prescription from Template
 				</b-button>
 
@@ -24,12 +24,12 @@
 
 			<section class="TemplateDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">Duration (weeks):</span>
-				<span class="TemplateDetail__field" v-text="prescriptionTemplate.durationWeeks"/>
+				<span class="TemplateDetail__field" v-text="template.durationWeeks"/>
 			</section>
 
 			<section class="TemplateDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">Description:</span>
-				<span class="TemplateDetail__field TemplateDetail__field--tall" v-text="prescriptionTemplate.description"/>
+				<span class="TemplateDetail__field TemplateDetail__field--tall" v-text="template.description"/>
 			</section>
 
 			<section class="TemplateDetail__content">
@@ -38,7 +38,7 @@
 				<div class="TemplateDetail__modules">
 					<module-detail
 						class="TemplateDetail__module"
-						v-for="(module, i) in prescriptionTemplate.modules"
+						v-for="(module, i) in template.modules"
 						:key="i"
 						:module="module"/>
 				</div>
@@ -61,7 +61,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import Datepicker from 'vuejs-datepicker';
 import ModuleDetail from './components/ModuleDetail';
-import Schedule from './components/Schedule';
+import Schedule from '../../components/Schedule';
 
 export default {
 	components: {
@@ -77,18 +77,27 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			prescriptionTemplate: 'prescription-template/prescription-template'
+			template: 'template/template'
 		})
 	},
 	methods: {
 		...mapActions({
-			fetchPrescriptionTemplate: 'prescription-template/get'
+			fetchTemplate: 'template/get'
 		}),
 		async fetch() {
 			this.isLoading = true;
 			const id = this.$route.params.id;
-			await this.fetchPrescriptionTemplate(id);
+			await this.fetchTemplate(id);
 			this.isLoading = false;
+		},
+		onCreatePrescriptionClick() {
+			this.$router.push({
+				name: 'prescription.create',
+				query: {
+					templateId: this.template._id,
+					startDate: this.exampleStartDate.toISOString().substring(0, 10)
+				}
+			});
 		}
 	},
 	created() {
