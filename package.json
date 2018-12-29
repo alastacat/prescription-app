@@ -7,8 +7,8 @@
 		"start": "npm run dev",
 		"build": "node build/build.js",
 		"lint": "eslint --ext .js,.vue src test/unit/specs",
-		"deploy": "node build/build.js && firebase deploy --only hosting",
-		"deployCI": "node build/build.js && firebase deploy --only hosting --token ${FIREBASE_TOKEN}",
+		"deploy": "node build/build.js && firebase deploy",
+		"deployCI": "node build/build.js && firebase deploy --token ${FIREBASE_TOKEN}",
 		"devScript": "node development/script"
 	},
 	"dependencies": {
