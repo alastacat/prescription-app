@@ -7,23 +7,36 @@
 const fs = require('fs');
 const database = require('./database');
 
-const OUTPUT_FILE_NAME = 'result.json';
+const OUTPUT_FILE_NAME = './development/result.json';
 
 // Modify the database object here
 
-const prescriptionTemplates = database['prescription-templates'];
+const prescriptions = database['prescriptions'];
 
-// The following added durationWeeks to each prescription-template
-// Object.values(prescriptionTemplates).forEach(pt => {
-// 	pt.durationWeeks = 4;
-// });
+Object.values(prescriptions).forEach(p => {
+	p.events.forEach((e) => {
 
-// The following added repeatDays to each module in a prescription-template
-// Object.values(prescriptionTemplates).forEach(pt => {
-// 	pt.modules.forEach(m => {
-// 		m.repeatDays = 7;
-// 	});
-// });
+		e.meta = {};
+
+		switch(e.type) {
+			case 'survey':
+				e.meta.questions = e.questions;
+				delete e.questions;
+				delete e.information;
+				break;
+			case 'information':
+				e.meta.photoUrl = e.photoUrl;
+				delete e.photoUrl;
+				e.meta.facts = e.information;
+				delete e.information;
+				delete e.questions;
+				break;
+			default:
+				console.log('unknown event type:', e);
+		}
+
+	});
+});
+
 
 fs.writeFile(OUTPUT_FILE_NAME, JSON.stringify(database), (data) => { console.log('Finished...', data ) });
-s

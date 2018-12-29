@@ -1,5 +1,5 @@
 {
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"description": "A web app to allow the creation of custom surveys and information modules for patients.",
 	"author": "Michael Fitzhavey <michael-fitzhavey@gmail.com>",
 	"scripts": {
@@ -7,8 +7,8 @@
 		"start": "npm run dev",
 		"build": "node build/build.js",
 		"lint": "eslint --ext .js,.vue src test/unit/specs",
-		"deploy": "node build/build.js && firebase deploy --only hosting",
-		"deployCI": "node build/build.js && firebase deploy --only hosting --token ${FIREBASE_TOKEN}",
+		"deploy": "node build/build.js && firebase deploy",
+		"deployCI": "node build/build.js && firebase deploy --token ${FIREBASE_TOKEN}",
 		"devScript": "node development/script"
 	},
 	"dependencies": {
