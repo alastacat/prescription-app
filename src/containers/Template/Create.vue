@@ -73,14 +73,14 @@
 				</b-col>
 			</b-row>
 
-			<section class="TemplateCreate__submit">
+			<section class="App__submit">
 				<b-button
 					variant="outline-primary"
 					:disabled="!isPrescriptionTemplateValid"
 					@click="submit">
 					Publish Prescription Template
 				</b-button>
-				<p class="text-danger TemplateCreate__submit--text" v-text="errorText"/>
+				<p class="text-danger App__submit--text" v-text="errorText"/>
 			</section>
 
 			<module-create-modal
@@ -130,7 +130,7 @@ export default {
 	},
 	methods: {
 		...mapActions({
-			submitTemplate: 'prescription-template/submit'
+			submitTemplate: 'template/submit'
 		}),
 		async submit() {
 			this.isLoading = true;
@@ -202,15 +202,6 @@ export default {
 			justify-content: space-between;
 		}
 
-	}
-
-	&__submit {
-		align-self: flex-end;
-
-		&--text {
-			display: inline-block;
-			margin-right: 1rem;
-		}
 	}
 
 }

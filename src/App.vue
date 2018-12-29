@@ -113,6 +113,17 @@ export default {
 			text-align: left;
 		}
 	}
+
+	&__submit {
+		align-self: flex-end;
+
+		&--text {
+			display: inline-block;
+			margin-right: 1rem;
+		}
+
+	}
+
 }
 
 @keyframes spin {

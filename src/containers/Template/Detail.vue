@@ -14,9 +14,9 @@
 				<h5 class="TemplateDetail__author" v-text="template.author"/>
 
 				<b-button
-					:to="{ name: 'prescription.create', query: { templateId: template._id } }"
 					variant="primary"
-					size="sm">
+					size="sm"
+					@click="onCreatePrescriptionClick">
 					Create Prescription from Template
 				</b-button>
 
@@ -61,7 +61,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import Datepicker from 'vuejs-datepicker';
 import ModuleDetail from './components/ModuleDetail';
-import Schedule from './components/Schedule';
+import Schedule from '../../components/Schedule';
 
 export default {
 	components: {
@@ -89,6 +89,15 @@ export default {
 			const id = this.$route.params.id;
 			await this.fetchTemplate(id);
 			this.isLoading = false;
+		},
+		onCreatePrescriptionClick() {
+			this.$router.push({
+				name: 'prescription.create',
+				query: {
+					templateId: this.template._id,
+					startDate: this.exampleStartDate.toISOString().substring(0, 10)
+				}
+			});
 		}
 	},
 	created() {

@@ -1,18 +1,11 @@
 <template>
-	<div class="TemplateList">
+	<div class="PrescriptionList">
 
-		<h2 class="App__title">View Templates</h2>
+		<h2 class="App__title">View Prescriptions</h2>
 
 		<section class="App__info">
 
-			<span>Click a Template to view its details.</span>
-
-			<b-button
-				:to="{ name: 'template.create' }"
-				variant="primary"
-				size="sm">
-				Create Template
-			</b-button>
+			<span>Click a Prescription to view its details.</span>
 
 		</section>
 
@@ -36,11 +29,11 @@
 
 			<template v-else>
 				<b-table
-					class="TemplateList__table"
-					:items="templates"
+					class="PrescriptionList__table"
+					:items="prescriptions"
 					:fields="fields"
 					hover
-					@row-clicked="goToTemplate">
+					@row-clicked="goToPrescription">
 
 					<template slot="Survey Modules" slot-scope="data">
 						<span v-if="data.item.modules" v-text="data.item.modules.filter(m => m.type === 'survey').length"/>
@@ -73,32 +66,33 @@ export default {
 				{ key: 'name' },
 				{ key: 'Survey Modules' },
 				{ key: 'Information Modules' },
-				{ key: 'description' },
 				{ key: 'author' },
+				{ key: 'purpose' },
+				{ key: 'startDate' }
 			],
 			authorFilter: null
 		}
 	},
 	computed: {
 		...mapGetters({
-			templates: 'template/templates'
+			prescriptions: 'prescription/prescriptions'
 		})
 	},
 	methods: {
 		...mapActions({
-			fetchTemplates: 'template/find'
+			fetchPrescriptions: 'prescription/find'
 		}),
 		async fetch() {
 			this.isLoading = true;
 			if (this.authorFilter) {
-				await this.fetchTemplates({ author: this.authorFilter })
+				await this.fetchPrescriptions({ author: this.authorFilter })
 			} else {
-				await this.fetchTemplates();
+				await this.fetchPrescriptions();
 			}
 			this.isLoading = false;
 		},
-		goToTemplate(template) {
-			this.$router.push({ name: 'template.detail', params: { id: template._id } });
+		goToPrescription(prescription) {
+			this.$router.push({ name: 'prescription.detail', params: { id: prescription._id } });
 		}
 	},
 	created() {
@@ -118,7 +112,7 @@ export default {
 <style lang="scss">
 @import '../../styles/index.scss';
 
-.TemplateList {
+.PrescriptionList {
 	@extend .flexbox;
 	padding: 1rem;
 

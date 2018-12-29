@@ -68,8 +68,7 @@ export default {
 			return (
 				this.email &&
 				this.password
-
-			)
+			);
 		}
 	},
 	methods: {

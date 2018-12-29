@@ -191,6 +191,7 @@ export default {
 			});
 			this.name = null;
 			this.questions = [];
+			this.information = [];
 		},
 		close() {
 			this.$emit('close');
