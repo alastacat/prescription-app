@@ -48,6 +48,10 @@
 				<datepicker class="TemplateDetail__field" id="prescriptionStart" placeholder="Select Start Date" v-model="startDate"/>
 			</b-form-group>
 
+			<section class="PrescriptionDetail__content">
+				<schedule :startDate="startDate" :events="events"/>
+			</section>
+
 			<section class="App__submit">
 				<p class="text-danger App__submit--text" v-text="errorText"/>
 				<b-button
@@ -57,9 +61,6 @@
 					Publish Prescription
 				</b-button>
 			</section>
-
-			<!--Commented out until schedule is ready to be displayed -->
-			<schedule :today="startDate"/>
 
 		</template>
 
