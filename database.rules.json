@@ -5,33 +5,19 @@
 		"users": {
 			"$key": {
 				".read": "$key === auth.uid",
-				".write": "$key === auth.uid",
-				".validate": "newData.hasChildren(['email', 'firstName', 'lastName', 'title'])"
-
+				".write": "$key === auth.uid"
 			}
 		},
 		"templates": {
 			".read": "auth != null",
 			"$key": {
-				".write": "auth != null && !data.exists()",
-				".validate": "newData.hasChildren(['author', 'description', 'durationWeeks', 'modules', 'name'])",
-				"modules": {
-					"$key": {
-						".validate": "newData.hasChildren(['name', 'repeatDays', 'type', 'meta'])"
-					}
-				}
+				".write": "auth != null && !data.exists()"
 			}
 		},
 		"prescriptions": {
 			".read": "auth != null",
 			"$key": {
-				".write": "auth != null && !data.exists()",
-				".validate": "newData.hasChildren(['author', 'description', 'event', 'purpose', 'name', 'startDate', 'templateId'])",
-				"events": {
-					"$key": {
-						".validate": "newData.hasChildren(['name', 'date', 'type', 'meta'])"
-					}
-				}
+				".write": "auth != null && !data.exists()"
 			}
 		}
 	}

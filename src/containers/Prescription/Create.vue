@@ -49,13 +49,13 @@
 			</b-form-group>
 
 			<section class="App__submit">
+				<p class="text-danger App__submit--text" v-text="errorText"/>
 				<b-button
 					variant="outline-primary"
 					:disabled="!isPrescriptionValid"
 					@click="submit">
 					Publish Prescription
 				</b-button>
-				<p class="text-danger App__submit--text" v-text="errorText"/>
 			</section>
 
 			<!--Commented out until schedule is ready to be displayed -->
@@ -169,7 +169,7 @@ export default {
 			}
 			try {
 				await this.submitPrescription(prescription);
-				this.$router.push({ name: 'template.list' });
+				this.$router.push({ name: 'prescription.list' });
 			} catch (err) {
 				this.errorText = err.message;
 			}

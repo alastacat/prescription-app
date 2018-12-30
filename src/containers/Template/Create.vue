@@ -74,13 +74,13 @@
 			</b-row>
 
 			<section class="App__submit">
+				<p class="text-danger App__submit--text" v-text="errorText"/>
 				<b-button
 					variant="outline-primary"
 					:disabled="!isPrescriptionTemplateValid"
 					@click="submit">
 					Publish Prescription Template
 				</b-button>
-				<p class="text-danger App__submit--text" v-text="errorText"/>
 			</section>
 
 			<module-create-modal
