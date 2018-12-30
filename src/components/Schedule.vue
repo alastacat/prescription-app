@@ -121,7 +121,7 @@ export default {
 		}
 	}
 
-	.event {
+	.cv-event.event {
 		cursor: pointer;
 
 		&--survey {
@@ -133,6 +133,7 @@ export default {
 			background: $green;
 			border-color: darken($green, 10%);
 		}
+
 	}
 
 }
