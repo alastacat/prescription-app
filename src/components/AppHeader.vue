@@ -120,6 +120,7 @@ export default {
 	padding: 1rem;
 	top: 0;
 	background: $white-off;
+	z-index: 2;
 
 	@media all and (min-width: $desktop) {
 		height: $headerHeightDesktop;
