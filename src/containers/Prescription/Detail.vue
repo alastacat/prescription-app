@@ -20,12 +20,15 @@
 				<span class="PrescriptionDetail__field PrescriptionDetail__field--tall" v-text="prescription.purpose"/>
 			</section>
 
-			<section class="PrescriptionDetail__content mb-0">
+			<section class="PrescriptionDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">Started on:</span>
 				<span class="PrescriptionDetail__field" placeholder="Select Start Date" v-text="startDate"/>
 			</section>
 
-			<schedule :today="startDate"/>
+			<section class="PrescriptionDetail__content">
+				<span class="App__label App__label--inline mt-3 w-25">Events:</span>
+				<schedule :startDate="startDate" :events="prescription.events"/>
+			</section>
 
 		</template>
 

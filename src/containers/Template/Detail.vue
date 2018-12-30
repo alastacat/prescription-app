@@ -45,12 +45,12 @@
 
 			</section>
 
-			<section class="TemplateDetail__content mb-0">
+			<section class="TemplateDetail__content">
 				<span class="App__label App__label--inline mt-3 w-25">If started on:</span>
 				<datepicker class="TemplateDetail__field" placeholder="Select Start Date" v-model="exampleStartDate"/>
 			</section>
 
-			<schedule :today="exampleStartDate"/>
+			<!-- <schedule :today="exampleStartDate"/> -->
 
 		</template>
 
